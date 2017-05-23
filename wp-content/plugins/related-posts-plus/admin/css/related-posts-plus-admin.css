@@ -1,0 +1,23 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+
+.related-post-wrap {
+	width: 100%;
+	overflow: hidden;
+}
+.related-posts-listed, .related-posts-selected {
+	height: 200px;
+	overflow-y: scroll;
+	width: 50%;
+	float: left;
+}
+.related-posts-listed a, .related-posts-selected a {
+	display: block;
+}
+.related-posts-listed .hide {
+	pointer-events: none;
+	cursor: default;
+	opacity: 0.5;
+}

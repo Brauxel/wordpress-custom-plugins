@@ -1,0 +1,111 @@
+/*
+	Dashcord Tracking Links (Admin) Stylesheet
+	by Stocks Digital <Aakash Bhatia>
+	URI: http://stocksdigital.com/
+	Author URI: http://thebrauxelcode.com/
+	Email: aakash@stocksdigital.com
+	NOTE: All of the CSS for your admin-specific functionality should be included in this file.
+*/
+
+.clear {
+	clear:both;
+}
+
+.dashcord-tracker {
+	width:100%;
+}
+
+.dashcord-tracker .field {
+	margin-top:20px;
+}
+
+.dashcord-tracker .field label {
+	float:left;
+	min-width:11%;
+	text-align:left;
+	line-height:30px;
+}
+
+.dashcord-tracker label .required {
+	color:#FF0000;
+	margin-left:5px;
+}
+
+.dashcord-tracker .input-text {
+	width:88%;
+	float:left;
+	height:30px;
+	line-height:30px;
+}
+
+.dashcord-tracker .input-textarea {
+	width:88%;
+	float:left;
+	height:100px;
+	line-height:20px;
+}
+
+.dashcord-tracker .submit-button {
+	background-color:#f36600;
+	border:none;
+	color:#fff;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	display:block;
+	float:right;
+	margin-top:20px;
+	margin-right:20px;
+	width:200px;
+	transition:all 0.4s ease-out 0s;
+	cursor:pointer;
+	padding:0px;
+}
+	.dashcord-tracker .submit-button:hover {
+		-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+		-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+		box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+		background-color:#fff;
+		color:#000;
+	}
+
+.trackers-listing-container {
+	padding-top:10px;
+}
+#trackers-listing {
+	width:100%;
+}
+
+#trackers-listing input[type=submit] {
+	background-image:url(../images/edit-delete.png);
+	background-repeat:no-repeat;
+	height:30px;
+	width:30px;
+	display:block;
+	text-indent:-1000px;
+	overflow:hidden;
+	margin:0 auto;
+	outline:none !important;
+	border:0px;
+	cursor:pointer;
+}
+	#trackers-listing .edit {
+		background-position: 0px -40px;
+	}
+	#trackers-listing .delete {
+		background-position: 0px 0px;
+	}
+	
+.edit-section {
+	display:block;
+}
+
+p.title {
+	font-size:24px;
+	line-height:30px;
+	text-align:center;
+	font-weight:bold;
+	text-decoration:underline;
+	padding-left:10px;
+	padding-right:10px;
+}

@@ -1,0 +1,35 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+ 
+.related-posts-admin {
+  list-style-type:none;
+}
+  .related-posts-admin li {
+	  border: 1px solid #ccc;
+	  margin-top: 10px;
+	  overflow: auto;
+	  padding: 10px 3%;
+	  width: 94%;
+	  cursor:move;
+	  display:block;
+  }
+  .related-posts-admin li label {
+	  display: block;
+	  float: left;
+	  margin-top: 0;
+	  width: auto;
+  }
+  .related-posts-admin li input[type='checkbox'] {
+	  float: left;
+	  margin-top: 2px !important;
+	  width: 2%;
+  }
+  
+#error-no-select {
+	display:none;
+	padding-top:10px;
+	padding-bottom:10px;
+	color:red;
+}
