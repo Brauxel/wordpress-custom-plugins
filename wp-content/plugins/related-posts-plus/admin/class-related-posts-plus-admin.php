@@ -42,6 +42,7 @@ class Related_Posts_Plus_Admin {
 	//private $postID;
 	
 	//public $post_array;
+	public $post_array;
 	private $term_ids_array;
 	private $term_taxonomy_ids_array;
 	private $related_posts;
@@ -66,10 +67,8 @@ class Related_Posts_Plus_Admin {
 		}
 	}
 		
-	public function initial_data( $current_screen ) {
-		if ( $current_screen->post_type == 'post'  && 'post' == $current_screen->base ) {
-			//$this->get_data();
-		}
+	public function initial_data() {
+		$this->get_data();
 		
 		//die(print_r($this->post_array));
 		//die(print_r($this->term_ids_array));
@@ -80,10 +79,10 @@ class Related_Posts_Plus_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function register_styles() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
+		 * This function is used to register the stylesheets for the admin-specific functionality of the plugin.
 		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Related_Posts_Plus_Loader as all of the hooks are defined
@@ -92,9 +91,89 @@ class Related_Posts_Plus_Admin {
 		 * The Related_Posts_Plus_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
+		 @
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/related-posts-plus-admin.css', array(), $this->version, 'all' );
+		 /**
+		  * This function is used to register the stylesheets that will be enqueued in $this->enqueue_styles()
+		  * Ref: https://codex.wordpress.org/Function_Reference/wp_register_style/
+		  * @param1   string:$handle   Name of the stylesheet. Should be unique
+		  * @parma2   string:$src   Full URL of the stylesheet, or path of the stylesheet relative to the WordPress root directory. In our case we get the URL (with trailing slash) 
+		  * for the plugin __FILE__ passed (https://codex.wordpress.org/Function_Reference/plugin_dir_url)
+		  * @param3   string:$ver   $this->version   The current version of the plugin set in includes/class-related-posts-plus.php Related_Posts_Plus->version
+		 **/
+		wp_register_style( $this->plugin_name.'_adminstyles', plugin_dir_url( __FILE__ ) . 'css/related-posts-plus-admin.css', null, $this->version, 'all');
+
+	}
+	
+	/**
+	 * Register the stylesheets for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_styles() {
+
+		/**
+		 * This function is used to enqueue the stylesheets for the admin-specific functionality of the plugin.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Related_Posts_Plus_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Related_Posts_Plus_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 *
+		 * The hooks are defined in $Related_Posts_Plus->define_admin_hooks()	
+		 @
+		 */
+		
+		 /**
+		  * This function is used to enqueue the stylesheets
+		  * Ref: https://developer.wordpress.org/reference/functions/wp_enqueue_style/
+		  * @param1   string:$handle   Unique Name of the stylesheet
+		 **/
+		wp_enqueue_style( $this->plugin_name.'_adminstyles' );
+
+	}
+	
+	/**
+	 * Register the scripts for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_scripts() {
+
+		/**
+		 * This function is used to register the scripts for the admin-specific functionality of the plugin.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Related_Posts_Plus_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Related_Posts_Plus_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 *
+		 * The hooks are defined in $Related_Posts_Plus->define_admin_hooks()		 
+		 @
+		 */
+
+		 /**
+		  * This function is used to register the scripts that will be enqueued in $this->enqueue_scripts()
+		  * Ref: https://developer.wordpress.org/reference/functions/wp_register_script/
+		  * @param1   string:$handle   Name of the stylesheet. Should be unique
+		  * @parma2   string:$src   Full URL of the stylesheet, or path of the stylesheet relative to the WordPress root directory. In our case we get the URL (with trailing slash) 
+		  * for the plugin __FILE__ passed (https://codex.wordpress.org/Function_Reference/plugin_dir_url)
+		  * @param3   array:$deps   ['jquery'] loads jquery-core(/wp-includes/js/jquery/jquery.js) and jquery-migrate-v1.10.2 (/wp-includes/js/jquery/jquery-migrate.js)
+		  * @param4   string:$ver   $this->version   The current version of the plugin set in includes/class-related-posts-plus.php Related_Posts_Plus->version
+		  * @param5   bool:$in_footer  Loads JS in <footer>
+		 **/
+		//wp_register_script( 'admincore', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin.js', array( 'jquery' ), $this->version, true);
+		//wp_register_script( $this->plugin_name.'_adminajax', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin-ajax.js', array( 'jquery' ), $this->version, true);
+		
+		wp_register_script( $this->plugin_name.'_core', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin.js', array( 'jquery' ), $this->version, false );
+		wp_register_script( $this->plugin_name.'_ajax', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin-ajax.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -106,7 +185,7 @@ class Related_Posts_Plus_Admin {
 	public function enqueue_scripts() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
+		 * This function is used to enqueue the scripts for the admin-specific functionality of the plugin.
 		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Related_Posts_Plus_Loader as all of the hooks are defined
@@ -115,12 +194,18 @@ class Related_Posts_Plus_Admin {
 		 * The Related_Posts_Plus_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
+		 *
+		 * The hooks are defined in $Related_Posts_Plus->define_admin_hooks()		 
+		 @
 		 */
 		
-		global $post;	
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name.'my-ajax', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin-ajax.js', array( 'jquery' ), $this->version, true );
+		 /**
+		  * This function is used to enqueue the scripts
+		  * Ref: https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts/
+		  * @param1   string:$handle   Unique Name of the scripts
+		 **/
+		wp_enqueue_script( $this->plugin_name.'_core' );
+		wp_enqueue_script( $this->plugin_name.'_ajax' );
 
 	}
 		
@@ -130,7 +215,31 @@ class Related_Posts_Plus_Admin {
 	 * @since    1.0.0
 	 */
 	public function posts_meta_box() {
+		/**
+		 * This function is used to render a meta box for the admin-specific functionality of the plugin on the posts dashboard
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Related_Posts_Plus_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Related_Posts_Plus_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 *
+		 * The hooks are defined in $Related_Posts_Plus->define_admin_hooks()		 
+		 @
+		 */
+		
+		 /**
+		  * This function is used to enqueue the scripts
+		  * Ref: https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts/
+		  * @param1   string:$handle   Unique Name of the scripts
+		 **/
+		
 		global $post;
+		
+		// Lets generate the array structures
+		$this->get_data();
 		
 		// If admin then continue with the plugin else exit the function			
 		if ( !is_admin() ):
@@ -138,6 +247,7 @@ class Related_Posts_Plus_Admin {
 		endif;
 		
 		$screens = array('post');   //limit meta box only to posts
+		
 		foreach( $screens as $screen ) {
 			add_meta_box(
 				'related_posts', // Name of the metabox
@@ -152,9 +262,6 @@ class Related_Posts_Plus_Admin {
 	
 	public function render_posts_meta_box_content( $post ) {
 		$relations = $this->build_relations( $post->ID );
-		//$p = $this->post_array;
-		//$this->get_data();
-		
 				
 		// Get the protocol of the current page
 		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
@@ -178,8 +285,6 @@ class Related_Posts_Plus_Admin {
 		// Print the script to our page
 		wp_localize_script( $this->plugin_name.'my-ajax', 'my_ajax_args', $this->params );
 		
-		//print_r($this->post_array);
-		
 	}
 	
 	/**
@@ -192,17 +297,9 @@ class Related_Posts_Plus_Admin {
 		$terms = $_REQUEST['tid'];
 		$post_id = $_REQUEST['pid'];
 		$relations_array = $_REQUEST['relations'];
-		//$terms = array(1,2,3);
 		$terms_tax = array();
 		$posts_id = array();
 		$posts = array();
-		//die(print_r($terms));
-		
-		if(isset($this->post_array)) {
-			//$this->get_data();
-		} else {
-			$this->get_data();
-		}
 		
 		if( $terms ) {
 			foreach( $this->term_ids_array as $key => $value ) {
@@ -215,7 +312,6 @@ class Related_Posts_Plus_Admin {
 						
 			foreach( $this->term_taxonomy_ids_array as $key => $value ) {
 				foreach ($terms_tax as $term_tax) {
-					//die(print_r($value));
 					if($value['term_taxonomy_id'] == $term_tax) {
 						array_push($posts_id, $value['object_id']);
 					}
@@ -223,7 +319,6 @@ class Related_Posts_Plus_Admin {
 			}
 			
 			foreach( $this->post_array as $key => $value ) {
-				//die(print_r($value));
 				foreach ($posts_id as $post_id) {
 					if($value['ID'] == $post_id) {
 						$posts[$value['ID']] = $value['post_title'];
@@ -231,9 +326,7 @@ class Related_Posts_Plus_Admin {
 				}
 			}
 			
-			//die(print_r($posts));
 		} else {
-			//die(print_r($this->post_array));
 			foreach( $this->post_array as $key => $value ) {
 				$posts[$value['ID']] = $value['post_title']; 
 			}
@@ -241,11 +334,7 @@ class Related_Posts_Plus_Admin {
 			
 		}
 		
-		//die(print_r($posts));
-		
 		require_once('partials/related-posts-plus-admin-display.php');
-
-		//echo $html;
 
 		// Always exit when doing Ajax
 		die();
@@ -255,7 +344,7 @@ class Related_Posts_Plus_Admin {
 	private function build_relations( $post_id ) {
 		$this->related_posts = get_post_meta( $post_id, 'related_post');
 		
-		if( isset($this->related_posts) ) {			
+		if( !empty($this->related_posts[0]) ) {			
 			foreach( $this->related_posts[0] as $related_post ) {
 				$relations[$related_post] = get_the_title($related_post);
 			}
@@ -267,17 +356,59 @@ class Related_Posts_Plus_Admin {
 	
 	public function get_data()  {
 		global $wpdb;
-		$this->post_array = $wpdb->get_results( 'SELECT ID, post_title FROM wp_posts WHERE post_type = "post" AND post_status = "publish"', ARRAY_A );
-		$this->term_taxonomy_ids_array = $wpdb->get_results( "SELECT term_taxonomy_id, object_id FROM {$wpdb->prefix}term_relationships", ARRAY_A );
-		$this->term_ids_array = $wpdb->get_results( "SELECT term_taxonomy_id, term_id FROM {$wpdb->prefix}term_taxonomy", ARRAY_A );
+		global $post;
+		
+		$this->post_array = get_posts( array('posts_per_page' => -1) );
+		$postcat = get_the_category( $post->ID );
+		
+		$posts = wp_list_pluck($this->post_array, 'ID');
+		
+		foreach($posts as $post) {
+			$t = get_the_category($post);
+			$ts[$t[0]->term_id] = $post;			
+		}
+		
+		
+		$categories = get_categories();
+		$queried_object = get_queried_object();
+		
+		foreach($categories as $category) {
+			$id = $category->term_ID;
+			$this->term_taxonomy_ids_array = get_posts( array('posts_per_page' => -1, category => $category->term_id, 'post_type' => 'post') );
+			die(print_r($this->term_taxonomy_ids_array));
+		}
+		
+		
+		$this->term_taxonomy_ids_array = get_posts( array('posts_per_page' => -1, 'post_type' => 'post') );
 	}
 	
 	public function save( $post ) {
-		//die(print_r($_POST['related_post']));
+		/**
+		 * This function is used to save the relaed posts by hooking into save_post hook.
+		 * Ref: https://codex.wordpress.org/Plugin_API/Action_Reference/save_post
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Related_Posts_Plus_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Related_Posts_Plus_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 *
+		 * The hooks are defined in $Related_Posts_Plus->define_admin_hooks()		 
+		 @
+		 */
+		
 		if ( isset( $_POST['related_post'] ) ) {
-			//die(print_r($_POST['related_posts']));
+		 /**
+		  * This function is used to update metadata of a post with the related_posts' ids as an array
+		  * it is stored in the wp_postsmeta table in your database
+		  * Ref: https://codex.wordpress.org/Function_Reference/update_post_meta
+		  * @param1   int:$post_id   Id of the current post
+		  * @param2:  string:$table_col_name   The name of the column in the table
+		  * @param3 array:$related_posts   Post IDs
+		 **/
 			update_post_meta( $_POST['post_ID'], 'related_post', $_POST['related_post'] );
 		}		
-		//echo "<script>console.log('save fired');</script>";
 	}
 }

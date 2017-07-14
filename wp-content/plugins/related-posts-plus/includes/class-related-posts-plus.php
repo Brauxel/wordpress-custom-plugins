@@ -149,14 +149,33 @@ class Related_Posts_Plus {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Related_Posts_Plus_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Related_Posts_Plus_Admin( $this->get_plugin_name(), $this->get_version() );				
 		
+		/**
+		  * admin_init is triggered before any other hook when a user accesses the admin area
+		  * @callback1 from admin/class-related-posts-plus-admin.php Related_Posts_Plus_Admin->register_admin_with_redirect()
+		  * @callback2 from admin/class-related-posts-plus-admin.php Related_Posts_Plus_Admin->enqueue_styles()
+		  * @callback3 from admin/class-related-posts-plus-admin.php Related_Posts_Plus_Admin->enqueue_scripts()
+		**/
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'restrict_admin_with_redirect' );
-		//$this->loader->add_action( 'init', $plugin_admin, 'initial_data' );
-		$this->loader->add_action( 'current_screen', $plugin_admin, 'initial_data' );
-		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'posts_meta_box' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_styles' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_scripts' );
+		
+		/**
+		  * admin_enqueue_scripts is the first action hooked into the admin scripts actions
+		  * @callback1 from admin/class-related-posts-plus-admin.php $Related_Posts_Plus_Admin->enqueue_styles()
+		  * @callback2 from admin/class-related-posts-plus-admin.php $Related_Posts_Plus_Admin->enqueue_scripts()
+		**/
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		
+		
+		//$this->loader->add_action( 'wp', $plugin_admin, 'get_data' );
+		//$this->loader->add_action( 'current_screen', $plugin_admin, 'initial_data' );
+		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'posts_meta_box' );
+		
+		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'wp_ajax_sd_ajax', $plugin_admin, 'sd_ajax' );
 		$this->loader->add_action( 'wp_ajax_nopriv_sd_ajax', $plugin_admin, 'sd_ajax' );
 		//$this->loader->add_action( 'wp', $plugin_admin, 'post_params' );		
