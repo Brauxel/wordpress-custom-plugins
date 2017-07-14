@@ -3,7 +3,7 @@
  * Plugin Name: Business Wire Feed
  * Description: Plugin to display the articles from the business wire feed
  * Version: 1.0
- * Author: Chris Adkins
+ * Author: Aakash Bhatia
  * Author URI: http://stocksdigital.com/
  * Plugin URI: http://stocksdigital.com/
  */
