@@ -102,7 +102,12 @@ $date = get_the_time('U');
                 				?>
     								<article class="col-md-4 mb-5">
     									<a class="image" href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'related_thumb' );?></a>
-    									<h4 class="mt-4 mb-2"><a href="<?php the_permalink(); ?>"><?php print( truncateString(get_the_title(), 80, true) ); ?></a></h4>
+    									<h4 class="mt-4 mb-2"><a href="<?php the_permalink(); ?>">
+										<?php
+											/*-- Truncates a string that is passed via arguments, by default the replacement for the truncated string is '...' however this can be overwritten via the argument ex: truncateString($str, 26, true, " :)") --*/
+											print( $nextinvestors->truncateString(get_the_title(), 70, true) );
+										?>
+    									</a></h4>
 										<p class="date"><?php the_time('M j, Y'); ?></p>
                     					<a class="btn btn-outline-primary" href="<?php the_permalink(); ?>">Read Article</a>
     								</article>
@@ -119,7 +124,7 @@ $date = get_the_time('U');
 							</div>
    					
    							<div class="row">
-   								<?php recent_posts(); ?>
+   								<?php $nextinvestors->recent_posts(); ?>
    							</div>
     					</section>
     				</div>

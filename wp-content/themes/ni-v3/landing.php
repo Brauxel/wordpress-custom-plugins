@@ -4,7 +4,7 @@ Template Name: Landing Page
 */
 
 // Fetch and store the $latest_posts via populate_latest() in functions.php
-$latest_posts = populate_latest();
+$latest_posts = $nextinvestors->populate_latest();
 
 get_header(); ?>
 			<div class="banner" id="video-banner-container">

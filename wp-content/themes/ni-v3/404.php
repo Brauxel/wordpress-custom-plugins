@@ -13,7 +13,7 @@
 						<h3 class="mb-5">Top Trending</h3>
 					</div>
 					
-					<?php recent_posts(6); ?>
+					<?php $nextinvestors->recent_posts(6); ?>
 				</div>
 			</div>
 <?php get_footer(); ?>

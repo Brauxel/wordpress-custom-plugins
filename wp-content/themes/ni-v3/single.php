@@ -76,7 +76,12 @@ $date = get_the_time('U');
 							?>
 								<article class="col-md-4 mb-5">
 									<a class="image" href="<?php echo get_permalink($aRelatedPost); ?>"><?php echo get_the_post_thumbnail( $theRelatedPost->ID, 'related_thumb' ); ?></a>
-									<h4 class="mt-4 mb-2"><a href="<?php echo get_permalink($aRelatedPost); ?>"><?php print( truncateString($theRelatedPost->post_title, 70, true) ); ?></a></h4>
+									<h4 class="mt-4 mb-2"><a href="<?php echo get_permalink($aRelatedPost); ?>">
+									<?php
+										/*-- Truncates a string that is passed via arguments, by default the replacement for the truncated string is '...' however this can be overwritten via the argument ex: truncateString($str, 26, true, " :)") --*/
+										print( $nextinvestors->truncateString($theRelatedPost->post_title, 70, true) );
+									?>
+									</a></h4>
 									<p class="date"><?php echo $newDate; ?></p>
 									<a class="btn btn-outline-primary" href="<?php echo get_permalink($aRelatedPost); ?>">Read Article</a>
 								</article>

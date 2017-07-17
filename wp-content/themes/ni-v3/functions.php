@@ -124,76 +124,6 @@ function register_taxonomy_company() {
 }
 /* -- COMPANY TAXONOMY END -- */
 
-/*-- Truncates a string that is passed via arguments, by default the replacement for the truncated string is '...' however this can be overwritten via the argument ex: truncateString($str, 26, true, " :)") --*/
-function truncateString($str, $chars, $to_space, $replacement="...") {
-   if( $chars > strlen($str) ) return $str;
-
-   $str = substr($str, 0, $chars);
-
-   $space_pos = strrpos($str, " ");
-   if($to_space && $space_pos >= 0) {
-       $str = substr($str, 0, strrpos($str, " "));
-   }
-
-   return($str . $replacement);
-}
-/* -- Truncate Ends -- */
-
-/* -- RECENT POSTS ACROSS MULTISITE START -- */
-function recent_posts($count = 3) {
-	global $wpdb;
-	global $post;
-	$postArray = array();
-	$currentBlog = get_current_blog_id();
-	$blog_list = wp_get_sites();
-	
-	foreach( $blog_list as $blog ) {
-		switch_to_blog( $blog['blog_id'] );
-		$posts = $wpdb->get_col(  "SELECT ID, post_date FROM sd_".$blog['blog_id']."_posts WHERE post_status = 'publish' AND post_type = 'post'");
-		if ( $blog['blog_id'] == 1 ) {
-			$posts = $wpdb->get_col( "SELECT ID, post_date FROM sd_posts WHERE post_status = 'publish' AND post_type = 'post'");
-		}
-
-		foreach($posts as $post) {
-			$postdetail = get_blog_post($blog['blog_id'], $post);
-			setup_postdata($postdetail);
-			
-			if ( !in_array($postdetail-> ID, $GLOBALS[ 'repAvoider' ] )) {
-				$postIndex = array(
-					'start_date'  =>  $postdetail->post_date,
-					'title'       =>  $postdetail->post_title,
-					'link'        =>  get_the_permalink( $postdetail->ID ),
-					'id'          =>  $postdetail->ID,
-					'image'       =>  get_the_post_thumbnail($postdetail->ID, 'related_thumb')
-				);
-				array_push($postArray, $postIndex);
-			}
-		}
-	}
-	
-	asort($postArray);
-	$postArray = array_reverse($postArray);
-	$postArray = array_slice($postArray, 0, $count);
-	
-	//echo 'in';
-	foreach( $postArray as $post ) {
-		// Add the ID to the array to avoid repetitions
-		array_push( $GLOBALS[ 'repAvoider' ], $post['id'] );
-		$truncatedTitle = truncateString($post['title'], 85, true);
-		echo '<article class="col-md-4 mb-5">';
-		echo '<a class="image" href="'.$post['link'].'">'.$post['image'].'</a>';
-		echo '<h4 class="mt-4 mb-2"><a href="'.$post['link'].'">'.$truncatedTitle.'</a></h4>';
-		echo '<div class="clear"></div>';
-		$newDate = date("M j, Y", strtotime($post['start_date']));
-		echo '<p class="date">'.$newDate.'</p>';
-		echo '<a class="btn btn-outline-primary" href="'.$post['link'].'">Read Article</a>';
-		echo '</article>';
-	}
-	
-	switch_to_blog($currentBlog);
-}
-/* -- RECENT POSTS ACROSS MULTISITE END -- */
-
 /*
 * Callback function to filter the MCE settings
 */
@@ -259,34 +189,6 @@ function om_form_submit_button( $button, $form ) {
     return $dom->saveHtml( $old_button );
 }
 
-/* -- Get latest posts from each subsite -- */
-function populate_latest() {
-	// Pull required globals to use DB queries 
-	global $wpdb;
-	global $post;
-	$latest_posts = array();
-	$currentBlog = get_current_blog_id();
-	
-	// Get a list of all site IDs
-	$blog_list = wp_get_sites();
-	
-	// Perform an array_shift on the list to pop the first site i.e. Next Investors.
-	array_shift($blog_list);
-	
-	// We comb through each blog ID and switches over to the blog to perfom a DB query
-	foreach( $blog_list as $blog ) {
-		switch_to_blog( $blog['blog_id'] );
-		array_push($latest_posts, $wpdb->get_results(  "SELECT id, post_title FROM sd_".$blog['blog_id']."_posts WHERE post_status = 'publish' AND post_type = 'post' ORDER BY post_date DESC LIMIT 1", ARRAY_A));
-		// array_push($latest_posts[0][0], $blog['blog_id']);
-	}
-	
-	//Switch back to current blog
-	switch_to_blog( $currentBlog );
-	
-	// Return the array containing the latest posts across all the sub-sites
-	return $latest_posts;
-}
-
 // remove default GF entry content function
 remove_action( 'gform_print_entry_content', 'gform_default_entry_content', 10 );
 
@@ -295,15 +197,5 @@ add_action( 'gform_print_entry_content', 'my_print_entry_content', 10, 3 );
 
 function my_print_entry_content( $form, $entry, $entry_ids ) {
   GFEntryDetail::lead_detail_grid( $form, $entry );
-}
-
-//include get_bloginfo('template_url'). '/functions/gravity-forms-custom.php';
-
-//add_filter( 'gform_field_input_49', 'test', 10, 5 );
-function test( $input, $field, $value, $lead_id, $form_id ) {
-    if ( $field->cssClass == 'email' ) {
-        $input = '<input type="hidden" id="hidTracker" name="hidTracker" value="'.$value.'">';
-    }
-    return $input;
 }
 ?>
