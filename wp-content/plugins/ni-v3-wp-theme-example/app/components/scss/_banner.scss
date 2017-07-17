@@ -1,0 +1,277 @@
+.banner {
+	position: relative;
+	
+	.overlay {
+		background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0;
+		display: block;
+		position: absolute;
+		z-index: 1;
+	}
+	
+	h1 {
+		display: block;
+		overflow: hidden;
+		
+		span {
+			text-indent: -5000px;	
+			display: block;
+			height: 1px;
+		}
+	}
+	
+	.banner-content {
+		color: #fff;
+		font-size: 1.6rem;
+		font-weight: normal;
+		//height: 100%;
+		position: relative;		
+		width: 100%;
+		z-index: 99;
+		padding-top: 3rem;
+		padding-bottom: 3rem;
+		
+		@include media-breakpoint-up(xl) {
+			padding-top: 9rem;
+			padding-bottom: 3rem;
+		}
+		
+		.show-form {
+			@include media-breakpoint-up(lg) {
+				display: none !important;
+			}
+		}
+		
+		@include media-breakpoint-up(lg) {
+			position: absolute;
+			display: table;
+		}
+		
+		.wrap {
+			@include media-breakpoint-up(lg) {
+				display: table-cell;
+				vertical-align: middle;
+			}
+		}
+		
+		.container {
+			p {
+				&.space-top {
+					margin-top: 20px;
+					margin-bottom: 20px;
+					
+					@include media-breakpoint-up(lg) {
+						margin-top: 55px;
+						margin-bottom: 55px;
+					}
+				}
+			}
+			
+			.logo {
+				display: block;				
+				
+				@include media-breakpoint-up(sm) {
+					width: 350px;
+				}
+			}
+			
+			.tiles {
+				.tile {
+					position: relative;
+					margin-bottom: 20px;
+					
+					@include media-breakpoint-up(sm) {
+						padding-left: 7px;
+						padding-right: 7px;
+						
+						&:first-child {
+							padding-left: 14px;
+						}
+						
+						&:last-child {
+							padding-right: 14px;
+						}
+					}
+					
+					a {
+						display: block;
+						overflow: hidden;
+						width: 90%;
+						margin: 0 auto;
+						
+						@include media-breakpoint-up(sm) {
+							width: 100%;
+						}
+						
+						img {
+							width: 100%;
+							
+							&.tiled-logo {
+								transition: all 0.2s ease-out 0s;
+					
+								&:hover {
+									transform: scale(1.1);
+								}								
+							}
+						}
+						
+						&.title {
+							position: absolute;
+							z-index: 99;
+							bottom: 20px;
+							left: 0px;
+							right: 0px;
+							margin: 0 auto;
+							
+							@include media-breakpoint-up(sm) {
+								bottom: 10px;
+							}
+							
+							img {
+								width: 75%;
+								max-width: 75%;
+								
+								@include media-breakpoint-up(sm) {
+									margin-left: 10px;
+								}
+							}
+						}
+					}
+					
+					.nmb-title {
+						.img-fluid {
+							@include media-breakpoint-up(md) {
+								margin-left: 10px;
+							}
+						}
+					}
+					@include media-breakpoint-up(sm) {
+						&:last-child {
+							.title {
+								img {
+									margin-left: 0px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	&.jumbotron {
+		font-size: 1.2rem;
+		color: $white;
+		background-repeat: no-repeat;
+		background-size: cover;
+		display: table;
+		//height: 400px;
+		width: 100%;
+		
+		.btn {
+			font-family: $font-family-sans-serif;
+		}
+		
+		@include media-breakpoint-up(lg) {
+			height: 350px;
+			padding-top: 55px;
+		}
+		
+		.gform_confirmation_wrapper {
+			background-color: transparent;
+		}
+		
+		.gform_wrapper {
+			margin: 0px -15px;
+			
+			&.articles-form_wrapper {
+				display: none;
+				
+				.gform_body {
+					position: relative;
+					
+					.close-btn {
+						position: absolute;
+						right: 0;
+						top: -123px;
+						width: 32px;
+						height: 32px;
+						opacity: 1;
+						display: block;
+						z-index: 1072;
+						text-indent: -1000px;
+						overflow: hidden;
+						
+						&:hover {
+							opacity: 1;
+						}
+						
+						&::before, &::after {
+							position: absolute;
+  							left: 15px;
+  							content: ' ';
+  							height: 33px;
+  							width: 2px;
+  							background-color: #fff;
+						}
+						
+						&::before {
+							 transform: rotate(45deg);
+						}
+						
+						&::after {
+							 transform: rotate(-45deg);
+						}
+						
+						@include media-breakpoint-up(lg) {
+							display: none;
+						}
+					}
+				}
+
+				@include media-breakpoint-up(lg) {
+					display: block;
+				}
+			}
+			
+			form {
+				background-color: transparent;
+				padding: 0px;
+				
+				.gform_heading {
+					font-size: 1.65rem;
+					
+				}
+				
+				.gform_body {
+					.gform_fields {
+						.gfield {
+							.ginput_container_checkbox {
+								label {
+									font-size: 1.2rem;
+									
+									&::before {
+										top: 10px;
+									}
+								}
+							}
+						}
+					}
+					
+				}
+				
+				.gform_footer {
+				}
+			}
+		}
+		
+		form {
+			label {
+				line-height: 1.2rem;
+				padding-left: 5px;
+			}
+			.checkbox {
+				margin-top: 10px;
+			}
+		}
+	}
+}

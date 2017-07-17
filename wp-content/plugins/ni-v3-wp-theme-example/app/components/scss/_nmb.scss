@@ -1,0 +1,62 @@
+.blog-9 {
+	main {
+		.jumbotron {
+			background-image: url(components/images/banners/nmb.jpg);
+			
+			.overlay {
+				background: rgba(0, 0, 0, 0.2);
+			}
+
+			.btn-outline-primary {
+				@include button-outline-variant($white, $nmb-brand-color);
+			}
+		}
+
+		.articles {
+			.btn-outline-primary {
+				@include button-outline-variant($nmb-brand-color, #fff);
+			}
+		}
+
+		&.tax-company {
+			.article-list {
+				.btn-outline-primary {
+					@include button-outline-variant($nmb-brand-color, #fff);
+				}
+			}
+		}
+
+		.wp-pagenavi {
+			//background-color: $nmb-brand-color;
+			//@include pagination-size(0.5rem, 0.5rem, $font-size-blog-listing, $line-height, $border-radius);
+
+			.page {
+				&:hover, &:active, &.active {
+					background-color: $nmb-brand-color;
+					border-color: $nmb-brand-color;
+				}
+			}
+
+			.current {
+				background-color: $nmb-brand-color;
+				border-color: $nmb-brand-color;
+			}
+		}
+		
+		.gform_confirmation_wrapper {
+			background-color: $nmb-brand-color;
+		}
+
+		.gform_wrapper {
+			form {
+				background-color: $nmb-brand-color;
+
+				.gform_footer {
+					.btn-outline-primary {
+						@include button-outline-variant($white, $nmb-brand-color);
+					}
+				}
+			}
+		}
+	}
+}

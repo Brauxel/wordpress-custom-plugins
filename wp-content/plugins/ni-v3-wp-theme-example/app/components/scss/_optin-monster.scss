@@ -1,0 +1,68 @@
+.optin-monster-custom {
+	color: #808080;
+
+	.popup-headline {
+		font-family: $font-family-serif;
+		font-size: 17px;
+		margin-top: 40px;
+		line-height: 1.5;
+
+		p {
+			margin-bottom: 0px;
+			margin-top: 0px;
+		}
+	}
+
+	.popup-text {
+		font-size: 14px;
+		font-family: $font-family-sans-serif;
+		margin-bottom: 20px;
+		line-height: 1.5;
+
+		p {
+			margin-bottom: 0px;
+			margin-top: 0px;
+		}
+	}
+
+	#omgform-div {
+		.gform_wrapper {
+			margin: 0rem -15px;
+			width: 400px;
+
+			form {
+				background-color: transparent;
+				padding: 0px 20px;
+
+				.gform_body {
+					padding-top: 0px;
+
+					.gform_fields {
+						.gfield {
+							padding-left: 0px;
+							flex: 0 0 100%;
+							max-width: 100%;
+							margin-top: 1.5rem;
+
+							&.options {
+								margin-top: 0px;
+							}
+						}
+					}
+				}
+
+				.gform_footer {
+					margin-top: 0px;
+
+					.btn-outline-primary {
+						width: auto;
+						height: auto;
+						line-height: 1;
+						@include button-size($btn-padding-y, 3rem, 1.4rem, $btn-border-radius);
+						@include button-outline-variant(#808080, #000);
+					}
+				}
+			}
+		}
+	}
+}

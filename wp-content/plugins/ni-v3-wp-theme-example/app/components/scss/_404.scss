@@ -1,0 +1,27 @@
+.error404 {
+	main {
+		padding-top: 2rem;
+		
+		@include media-breakpoint-up(lg) {
+			padding-top: 9rem;
+		}
+		
+		.image {
+			display: block;
+
+			img {
+				max-width: 100%;
+				height: auto;
+			}
+		}
+		.date {
+			color: #898b8e;
+			font-size: 1.2rem;
+		}
+
+		.btn-outline-primary {
+			@include button-size(0.2rem, 2rem, $font-size-button, $btn-border-radius);
+			@include button-outline-variant($black, $white);
+		}
+	}
+}

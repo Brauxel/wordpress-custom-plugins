@@ -1,0 +1,57 @@
+/*
+	* Next Tech Stock Custom Styles
+*/
+.blog-12 {
+	main {
+		.jumbotron {
+			background-image: url(components/images/banners/nts.jpg);
+
+			.btn-outline-primary {
+				@include button-outline-variant($white, $nts-brand-color);
+			}
+		}
+
+		.articles {
+			.btn-outline-primary {
+				@include button-outline-variant($nts-brand-color, #fff);
+			}
+		}
+
+		&.tax-company {
+			.article-list {
+				.btn-outline-primary {
+					@include button-outline-variant($nts-brand-color, #fff);
+				}
+			}
+		}
+
+		.wp-pagenavi {
+			//background-color: $nmb-brand-color;
+			//@include pagination-size(0.5rem, 0.5rem, $font-size-blog-listing, $line-height, $border-radius);
+
+			.page {
+				&:hover, &:active, &.active {
+					background-color: $nts-brand-color;
+					border-color: $nts-brand-color;
+				}
+			}
+
+			.current {
+				background-color: $nts-brand-color;
+				border-color: $nts-brand-color;
+			}
+		}
+
+		.gform_wrapper {
+			form {
+				background-color: $nts-brand-color;
+
+				.gform_footer {
+					.btn-outline-primary {
+						@include button-outline-variant($white, $nts-brand-color);
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,58 @@
+body.with-alert{
+	margin-top: 120px;
+
+	header{
+		top: 120px !important;
+
+		.toggler{
+			top: 136px;
+		}
+	}
+
+	@include media-breakpoint-up(md) {
+		margin-top: 80px;
+
+		header{
+			top: 80px !important;
+
+			.toggler{
+				top: auto;
+			}
+		}
+	}
+	@include media-breakpoint-up(lg) {
+		margin-top: 55px;
+
+		header{
+			top: 55px !important;
+		}
+	}
+	
+	.alert-reset {
+		top: 16px !important;
+	}
+}
+
+.alert-row {
+	position: fixed;
+	top: 0;
+	height: 120px;
+	width: 100%;
+	z-index: 1000;
+
+	.alert {
+		font-size: 1.5rem;
+		height: 100%;
+
+		a{
+			color: $alert-warning-text !important;
+		}
+	}
+
+	@include media-breakpoint-up(md) {
+		height: 80px;
+	}
+	@include media-breakpoint-up(lg) {
+		height: 55px;
+	}
+}

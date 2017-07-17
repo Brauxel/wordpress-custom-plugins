@@ -1,0 +1,57 @@
+/*
+	* Next Biotech Custom Styles
+*/
+.blog-15 {
+	main {
+		.jumbotron {
+				background-image: url(components/images/banners/nbt.jpg);
+
+			.btn-outline-primary {
+				@include button-outline-variant($white, $nbt-brand-color);
+			}
+		}
+
+		.articles {
+			.btn-outline-primary {
+				@include button-outline-variant($nbt-brand-color, #fff);
+			}
+		}
+
+		&.tax-company {
+			.article-list {
+				.btn-outline-primary {
+					@include button-outline-variant($nbt-brand-color, #fff);
+				}
+			}
+		}
+
+		.wp-pagenavi {
+			//background-color: $nmb-brand-color;
+			//@include pagination-size(0.5rem, 0.5rem, $font-size-blog-listing, $line-height, $border-radius);
+
+			.page {
+				&:hover, &:active, &.active {
+					background-color: $nbt-brand-color;
+					border-color: $nbt-brand-color;
+				}
+			}
+
+			.current {
+				background-color: $nbt-brand-color;
+				border-color: $nbt-brand-color;
+			}
+		}
+
+		.gform_wrapper {
+			form {
+				background-color: $nbt-brand-color;
+
+				.gform_footer {
+					.btn-outline-primary {
+						@include button-outline-variant($white, $nbt-brand-color);
+					}
+				}
+			}
+		}
+	}
+}

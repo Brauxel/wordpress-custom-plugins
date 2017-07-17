@@ -1,0 +1,156 @@
+/* 
+	Bootstrap overrides
+	Copy variables from `_variables.scss` to this file to override default values without modifying source files.
+*/
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1170px
+);
+@include _assert-ascending($container-max-widths, "$container-max-widths");
+
+// Colors
+//
+// Grayscale and brand colors for use across Bootstrap.
+
+// Start with assigning color names to specific hex values.
+$black-transparent: rgba(0,0,0,0.6);
+$gray: #525252;
+$light-black: #29282a;
+$dark-panel-bg: #1d1d1d;
+$ni-brand-color: #29282a;
+$nmb-brand-color: #cbb55b;
+$nor-brand-color: #6B728B;
+$nsc-brand-color: #4A8897;
+$nts-brand-color: #7C5AA3;
+$nbt-brand-color: #3D82C4;
+$text-color: #414042;
+$blog-listing-text-color: #6d6e71;
+$sidebar-text-color:  #414042;
+$sidebar-secondary-btn-bg: #676767;
+// Fonts
+//
+// Font, line-height, and color for body text, headings, and more.
+$font-family-sans-serif: "avenirregular", Helvetica Neue, Helvetica, Arial;
+$font-family-base: $font-family-sans-serif;
+$font-family-serif: "Georgia",Times,Times New Roman,serif;
+$btn-primary-font-family: "avenirregular", Helvetica Neue, Helvetica, Arial;
+$btn-secondary-font-family: "avenirregular", Helvetica Neue, Helvetica, Arial;
+$line-height-base: 1.3;
+
+$font-size-root: 10px; // This sets the root size for our website, all subsequent font-sizes are relative to this
+$font-size-base: 1.8rem;
+$font-size-h1: 3.5rem;
+$font-size-h2: 2.6rem;
+$font-size-h3: 2rem;
+$font-size-h4: 1.75rem;
+$font-size-h5: 1.5rem;
+$font-size-h6: 1.25rem;
+$font-size-blog-listing: 1.65rem;
+$font-size-button: 1.4rem;
+
+$headings-font-family:   $font-family-serif;
+$headings-font-weight:   normal;
+$headings-line-height:   1.1;
+
+// Links
+//
+// Style anchor elements.
+$link-color:            $white;
+//$link-decoration:       none !default;
+$link-border:			1px solid $white;
+$link-hover-color:      $light-black;
+$link-hover-decoration: none;
+$link-hover-border:		$link-border;
+$link-border-color-with-opacity: rgba(255, 255, 255, 0.5);
+$link-padding: 10px 35px;
+
+// Forms
+// Custom bg color and placeholder color for Search Bar
+$input-search-bg: transparent; 
+$input-search-color-placeholder: $white;
+
+$input-group-addon-bg:	transparent;
+$input-group-addon-border-color: none;
+
+
+// Jumbotron
+$jumbotron-padding:		0rem;
+//$jumbotron-bg:          $gray-lighter !default;
+
+// Reassign color vars to semantic color scheme
+$brand-primary:             $white;
+$brand-success:             $green !default;
+$brand-info:                $teal !default;
+$brand-warning:             $orange !default;
+$brand-danger:              $red !default;
+$brand-inverse:             $gray-dark !default;
+
+
+// Buttons
+//
+// For each of Bootstrap's buttons, define text, background and border color.
+
+$btn-padding-x:                  3rem;
+$btn-padding-y:                  0.5rem;
+/*$btn-line-height:                1.25 !default;
+$btn-font-weight:                $font-weight-normal !default;
+$btn-box-shadow:                 inset 0 1px 0 rgba($white,.15), 0 1px 1px rgba($black,.075) !default;
+$btn-focus-box-shadow:           0 0 0 2px rgba($brand-primary, .25) !default;
+$btn-active-box-shadow:          inset 0 3px 5px rgba($black,.125) !default; */
+
+//$btn-primary-color:              $brand-primary;
+//$btn-primary-bg:                 $brand-primary !default;
+$btn-primary-border:             lighten($btn-primary-bg, 25%);
+$btn-primary-font-size: 		 1.3rem;
+$btn-primary-opacity:			 0.6;
+//@include button-outline-variant($btn-primary-bg);
+
+$btn-secondary-color:            $white;
+$btn-secondary-bg:               $gray;
+$btn-secondary-border:           $gray;
+$btn-secondary-font-size: 		 1.5rem;
+
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius:              0rem;
+/* $btn-border-radius-lg:           $border-radius-lg !default;
+$btn-border-radius-sm:           $border-radius-sm !default;*/
+
+// Pagination
+
+$pagination-padding-x:                1rem;
+$pagination-padding-y:                0px;
+$pagination-padding-x-sm:             .5rem !default;
+$pagination-padding-y-sm:             0px;
+$pagination-padding-x-lg:             1.5rem !default;
+$pagination-padding-y-lg:             0px;
+$pagination-line-height:              1.5;
+
+$pagination-color:                     $blog-listing-text-color;
+$pagination-bg:                        none;
+$pagination-border-width:              0px;
+$pagination-border-color:              none;
+
+$pagination-hover-color:               $white;
+//$pagination-hover-bg:                  $nmb-brand-color;
+//$pagination-hover-border:              $nmb-brand-color;
+
+$pagination-active-color:              $white;
+//$pagination-active-bg:                 $nmb-brand-color;
+//$pagination-active-border:             $nmb-brand-color;
+
+$pagination-disabled-color:            $gray-light !default;
+$pagination-disabled-bg:               $white !default;
+$pagination-disabled-border:           #ddd !default;
+
+//Modals
+$modal-content-bg: $light-black;
+//$modal-content-border-width: none;
+//$modal-content-border-color: rgba($black,.2) !default;
+
+

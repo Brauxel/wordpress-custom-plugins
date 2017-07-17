@@ -1,0 +1,92 @@
+#search-page {
+	background-color: $light-black;
+	padding-top: 2rem;
+	
+	@include media-breakpoint-up(lg) {
+		padding-top: 9rem;
+	}
+	
+	.results-search-form-holder {
+		.navbar-form {
+			position: relative;
+			display: block;
+			padding-left: 2.8rem;
+			padding-right: 2.8rem;
+			
+			.search-icon {
+				right: 30px;
+			}
+			
+			.form-control {
+				background-color: transparent;
+    			border: 1px solid #fff;
+    			border-radius: 0;
+    			color: #fff;
+				
+				&:focus {
+					background-color: $white;
+					color: $light-black;
+				}
+			}
+		}
+	}
+	
+	h1 {
+		color: $white;
+		text-align: center;
+		
+		@include media-breakpoint-up(md) {
+			padding-left: 2.8rem;
+			text-align: left;
+		}
+	}
+	
+	.articles {
+		background-color: $white;
+		
+		article {
+			font-size: 1.5rem;
+			
+			.btn-outline-primary {
+				@include button-size(0.2rem, 2rem, $btn-primary-font-size, $btn-border-radius);
+			}
+			
+			h4, h3 {
+				text-transform: none;
+			}
+			
+			&:nth-child(odd) {
+				background-color: #f6f6f6;
+			}
+			
+			&:nth-child(even) {
+				background-color: $white;
+			}
+		}
+	}
+	.wp-pagenavi {
+		background-color: transparent;
+		margin-top: 0px;
+		font-size: 1.4rem;
+		color: $white;
+		text-align: left;
+		border-color: $white;
+		text-align: center;
+		
+		@include media-breakpoint-up(md) {
+			padding-left: 2.8rem;
+			padding-right: 2.8rem;
+			text-align: left;
+		}
+
+		a, span {
+			color: $white;
+			
+			&:hover, &.current, &:active, &.active {
+				background-color: $white;
+				color: $light-black;
+				border-color: $white;
+			}
+		}
+	}
+}

@@ -1,0 +1,10 @@
+.page-template-default {
+	main {
+		padding-top: 2rem;
+		
+		@include media-breakpoint-up(lg) {
+			padding-top: 9rem;
+		}
+		font-size: 1.8rem;
+	}
+}

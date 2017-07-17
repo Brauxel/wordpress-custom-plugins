@@ -1,0 +1,126 @@
+footer {
+	background-color: $light-black;
+	color: $white;
+	padding-bottom: 1.5rem;
+	font-size: 1.4rem;
+	
+	.form-control {
+		width: 100%;
+		
+		@include media-breakpoint-up(md) {
+			width: 100%;
+		}
+	}
+	
+	.secondary-nav {
+		li {
+			a {
+				padding-top: 0.8rem;
+				padding-bottom: 0.8rem;
+				display: block;
+
+				@include media-breakpoint-up(md) {
+					padding-top: 0.4rem;
+					padding-bottom: 0.4rem;
+				}
+			}
+		}
+	}
+	
+	.latest-articles-current-site {
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+		
+		h4 {
+			text-transform: none;
+			font-size: 1.8rem;
+		}
+		
+		.date {
+			color: #b2b4b6;
+		}
+	}
+		
+	ul {
+		font-size: 1.4rem;
+		padding-left: 15px;
+
+		li {
+			a {
+				color: $white;
+
+				&:hover, &:focus {
+					color:$white;
+				}
+			}
+		}
+
+		&.social-icons {
+			padding-left: 0px;
+			
+			li {
+				&:first-child {
+					padding-left: 0px;
+				}
+				a {
+					svg {
+						fill: $white;
+					}
+				}
+			}
+		}
+	}	
+
+	.button-2 {
+		margin-top: 1rem;
+	}
+	
+	.sub-footer {
+		font-size: 1.1rem;
+		margin-top: 4rem;
+		
+		@include media-breakpoint-up(md) {
+			margin-top: 13rem;
+		}
+	}
+	
+	.gform_wrapper {
+		width: 100% !important;
+		margin: 2rem 0px;
+		
+		form {
+			padding: 0px;
+			
+			.gform_body {
+				padding: 0px;
+				
+				@include media-breakpoint-up(md) {
+					.gform_fields {
+						.gfield {
+							flex: 0 0 100%;
+							max-width: 100%;
+						}
+					}
+				}
+				
+				.options {
+					display: none;
+				}
+				
+				.manage-controls {
+					display: none !important;
+				}
+			}
+			
+			.gform_footer {
+				padding: 0px;
+				
+				p {
+					display: none !important;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,451 @@
+header {
+	background: transparent;
+	opacity: 1;
+	font-size: 1.5rem;
+	padding-bottom: 1.5rem;
+	padding-top: 1.5rem;
+	transition: all 0.2s ease-out 0s;
+	
+	.logo {
+		@include media-breakpoint-up(lg) {
+			display: block !important;
+		}
+		
+		a {
+			width: 40px;
+			height: 40px;
+			display: none;
+			
+			@include media-breakpoint-up(lg) {
+				display: block;
+			}
+			
+			svg {
+				fill: #fff;
+				transition: $transition-base;
+				
+				@include media-breakpoint-up(lg) {
+					display: none;
+				}
+			}
+			
+			img {
+				display: none;
+				opacity: 0.7;
+				transition: all 0.4s ease-out 0s;
+				
+				@include media-breakpoint-up(lg) {
+					display: block;
+				}
+			}
+			
+			&:hover {
+				svg {
+					opacity: 0.8;
+				}
+				img {
+					opacity: 1;
+				}
+			}
+		}
+		
+		&.logo-res {
+			position: absolute;
+			top:15px;
+			left: 15px;
+			display: block !important;
+			
+			a {
+				display: block;
+				
+				@include media-breakpoint-up(lg) {
+					display: none !important;
+				}
+				
+				svg {
+					fill: #fff !important;
+				}
+			
+				&:hover {
+					svg {
+						opacity: 1;
+					}
+				}
+			}
+			
+			@include media-breakpoint-up(md) {
+				display: none;
+			}
+		}
+	}
+		
+	&.scrolled {
+		padding-bottom: 1.5rem;
+		padding-top: 1.5rem;
+		
+		.toggler {
+			.nav-toggle {
+				background: rgba(41, 40, 42, 0.6);
+				padding-top: 2px;
+				padding-bottom: 2px;
+				border-radius: 0.25rem;
+				
+				&:hover {
+					background: rgba(41, 40, 42, 0.8);
+				}
+			}
+		}
+		
+		@include media-breakpoint-up(lg) {
+			background-color: $black;
+			opacity: 1;
+			border-bottom: 1px solid rgba(41, 40, 42, 0.3);
+			
+			a {
+				color: $white;
+
+				&:hover {
+					color: $white;
+				}
+			}
+		}
+			
+			
+		&.white {
+			.logo {
+				a {
+					display: block;
+					
+					svg {
+						fill: #29282a;
+						opacity: 0.6;
+						display: block;
+					}
+					
+					@include media-breakpoint-up(lg) {
+						img {
+							display: none;
+						}
+					}
+				}
+			}
+
+			@include media-breakpoint-up(lg) {
+				background-color: $white;
+
+				a {
+					color: $light-black;
+
+					&:hover {
+						color: $light-black;
+					}
+				}
+
+				.form-control {
+					background-color: #f2f2f3;
+					color: #898b8e;
+
+					&::-webkit-input-placeholder { color: #898b8e; }
+					&::-moz-placeholder { color: #898b8e; }
+					&::-ms-input-placeholder { color: #898b8e; }
+
+				}
+				
+				.search-icon {
+					background-image: url(components/images/search-icon-focused.png);
+				}
+			}
+		}
+			
+	}
+	
+	@include media-breakpoint-up(lg) {
+		background: $black-transparent;
+		//opacity: 0.6;		
+	}
+	
+	nav {
+		transition: all 0.2s ease-out 0s;
+		position: fixed;
+		top: 0px;
+		right: 0px;
+		width: 280px;
+		background-color: $light-black;
+		opacity: 1;
+		z-index: $zindex-navbar;
+		height: 100vh;
+		overflow: scroll;
+		right: -280px;
+		padding: 6rem 0px;
+		
+		&.show {
+			right: 0px;
+		}
+		
+		@include media-breakpoint-up(lg) {
+			width: auto;
+			right: 0px;
+			left: 0px;
+			height: auto;
+			position: relative;
+			background-color: transparent;
+			overflow: hidden;
+			padding: 0px;
+			
+			&.align-wrapper {
+				display: block;
+				
+				.align-middle {
+					display: block;
+				}
+			}
+			
+		}
+		
+		ul {
+			list-style-type: none;
+			margin-bottom: 0px;
+			text-transform: uppercase;
+			margin-top: 4rem;
+			margin-bottom: 4rem;
+			
+			@include media-breakpoint-up(lg) {
+				margin-top: 0rem;
+				margin-bottom: 0rem;
+			}
+			
+			&.row {
+				padding-left: 0px;
+				margin-left: 0px;
+				margin-right: 0px;
+				padding-right: 0px;
+			}
+				
+			&.text-left {
+				@include media-breakpoint-up(lg) {
+					text-align: center;
+				}
+			}
+			
+			li {
+				float: none;
+				
+				a {
+					color: #fff;
+					display: block;
+					font-size: 1.3rem;
+					line-height: 3.5;
+					padding: 0 0px;
+					text-transform: uppercase;
+					font-weight: bolder;
+					
+					@include media-breakpoint-up(lg) {
+						text-align: center;
+					}
+					
+					span {
+						color: #fff;
+						opacity: 0.6;
+												
+						@include media-breakpoint-up(lg) {
+							display: none;
+						}
+					}
+					
+					@include media-breakpoint-up(lg) {
+						line-height: 4rem;
+						font-size: 1.1rem;
+						font-weight: normal;
+					}
+					
+					@include media-breakpoint-up(xl) {
+						font-size: 1.3rem;
+					}
+
+					&:hover, &:focus {
+						color: #fff;
+						text-decoration: none;
+						
+						span {
+							color: #fff;
+						}
+					}
+				}
+				
+				&:first-child {
+					@include media-breakpoint-up(lg) {
+						padding-left: 0px;
+					}
+				}
+				
+				&:last-child {
+					@include media-breakpoint-up(lg) {
+						padding-right: 0px;
+					}
+				}
+			}
+		}
+		
+		a {
+			&.btn-outline-primary {
+				margin: 10px 15px 0px;
+				display: block;
+				opacity: 1;
+				
+				@include button-size($btn-padding-y, 1rem, 1.2rem, $btn-border-radius);
+				
+				@include media-breakpoint-up(lg) {
+					display: none;
+				}
+			}
+			
+			&.manage {
+				color: #a9a9aa;
+				display: inline-block;
+				font-size: 1.2rem;
+				line-height: 37px;
+				text-decoration: underline;
+				text-transform: uppercase;
+				display: block;
+				margin: 10px 15px 20px 15px;;
+				
+				@include media-breakpoint-up(lg) {
+					display: none;
+				}
+			}
+		}
+	}
+	
+	.navbar-form {
+		display: none;
+		position: relative;
+		
+		@include media-breakpoint-up(lg) {
+			margin-top: 4px;
+		}
+		
+		.form-control {
+			opacity: 0.65;
+			background-color: $input-search-bg;
+			color: $input-search-color-placeholder;
+			border: 1px solid #fff;
+			border-radius: 0px;
+						
+			&:focus {
+				background-color: $white !important;
+				color: #898b8e !important;
+			}
+			
+			&::placeholder {
+				color: $input-search-color-placeholder;
+			}
+
+			@include media-breakpoint-up(lg) {
+				opacity: 1;
+			}
+		}
+		
+		@include media-breakpoint-up(lg) {
+			display: block;
+		}		
+	}
+	
+	.navbar-res {
+		.navbar-form {
+			display: block;
+			padding: 0px 15px;
+			
+			.search-icon {
+				right: 15px;
+			}
+			
+			.form-control {
+				background-color: #333333;
+			}
+
+			@include media-breakpoint-up(lg) {
+				display: none;
+			}
+		}
+	}
+	
+	.toggler {
+		position: fixed;
+		right: 0px;
+		top: 16px;
+		width: auto;
+		z-index: $zindex-tooltip;
+		
+		@include media-breakpoint-up(lg) {
+			position: relative;
+			right: 0px;
+			top: auto;
+			z-index: 1;
+			display: block !important;
+		}
+		
+		
+		.nav-toggle {
+			&::before, &::after {
+				content: " ";
+				position: absolute;
+				display: block;
+				background-color: #fff;
+				height: 1px;
+				margin-top: -1px;
+				left: 5px;
+				right: 5px;
+				z-index: 9;
+				transition: all 0.2s ease-out 0s;
+			}
+			&::before {
+				top: 25%;
+			}
+			
+			width: 40px;
+			height: 35px;
+			background-color: transparent;
+			position: relative;
+			display: block;
+			text-indent: -1000px;
+			overflow: hidden;
+			outline: none;
+			
+			span {
+				background-color: #fff;
+				height: 1px;
+				margin-top: -1px;
+				top: 50%;
+				left: 5px;
+				right: 5px;
+				z-index: 10;
+				position: absolute;
+				display: block;
+			}
+			
+			&::after {
+				top: 75%;
+			}
+			
+			&.nav-close {
+				&::before, &::after {
+					top: inherit;
+				}
+				&::before {
+					transform: rotate(45deg);
+				}
+				
+				&::after {
+					transform: rotate(-45deg);
+				}
+				span {
+					display: none;
+				}
+			}
+			
+			@include media-breakpoint-up(lg) {
+				display: none;
+			}
+		}
+	}
+}

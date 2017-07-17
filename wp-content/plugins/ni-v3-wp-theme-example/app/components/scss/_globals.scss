@@ -1,0 +1,277 @@
+html {
+	font-size: $font-size-root; // Refer to _custom.scss
+	
+	&.no-scroll {
+		overflow:hidden;
+		height:100%;
+	}
+		
+	body {
+		//font-size: 2rem;
+		//font-family: 'avenirregular', Helvetica Neue, Helvetica, Arial;
+		//font-family: $font-family-sans-serif;
+		
+		main {
+			padding-bottom: 2rem;
+			word-wrap: break-word;
+		}
+		
+		h2 {
+			//font-weight: normal;
+			//font-family: "Georgia",Times,Times New Roman,serif;
+		}
+
+		h3 {
+			text-transform: uppercase;
+			//font-family: "Georgia",Times,Times New Roman,serif;
+		}
+		
+		h4 {
+			text-transform: uppercase;
+			margin-bottom: 3rem;
+			//font-weight: normal;
+			//font-family: "Georgia",Times,Times New Roman,serif;
+		}
+		
+		.hider {
+			display: none;
+		}
+		
+		.super-show {
+			display: block !important;
+		}
+		
+		a, button {
+			transition: $transition-base;
+			cursor: pointer;
+			color: inherit;
+			outline: none;
+			
+			&.btn-outline-primary {
+				text-transform: uppercase;
+				opacity: $btn-primary-opacity;
+				font-family: $btn-primary-font-family;
+				@include button-outline-variant($white, #000);
+				@include button-size($btn-padding-y, $btn-padding-x, $btn-primary-font-size, $btn-border-radius);				
+				
+				&:active, &.active, &:hover {
+					opacity: 1;
+				}
+				
+				&.disabled, &:disabled {
+					&:hover {
+						opacity: $btn-primary-opacity;
+					}
+				}
+			}
+			
+			&.btn-secondary {
+				font-family: $btn-secondary-font-family;
+				text-transform: uppercase;
+				
+				@include button-size($btn-padding-y, 2rem, $btn-secondary-font-size, $btn-border-radius);
+				//@include button-variant($white, $gray, $gray);
+				
+				&:hover {
+					color: $gray;
+					background-color: $white;
+				}
+			}
+		}
+		
+		.close-btn {
+			display: none;
+		}
+		
+		.align-wrapper {
+			display: table;
+		}
+		
+		.social-icons {
+			list-style-type: none;			
+			padding-left: 0px;
+			width: 165px;
+			overflow: hidden;
+			
+			li {
+				padding-left: 5px;
+				padding-right: 5px;
+				float: left;
+				
+				a {
+					display: block;
+					width: 31px;
+					opacity: 0.5;
+					height: 31px;
+
+					&:hover {
+						opacity: 1;
+					}
+
+					svg {
+						height: 31px;
+						width: 100%;
+						fill: $sidebar-secondary-btn-bg;
+					}
+				}
+			}
+		}
+		
+		.raisebook-block {
+			background-image: url(components/images/blogs/raisebook-banner.jpg);
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center center;
+			font-size: 1.7rem;
+			color: $white;
+			display: none;
+			cursor: pointer;
+			
+			@include media-breakpoint-up(lg) {
+				width: 100%;
+				display: block;
+			}
+			
+			.img-fluid {
+				width: 300px;
+				max-width: 100%;
+				
+				@include media-breakpoint-up(lg) {
+					width: 100%;
+					max-width: 100%;
+				}
+			}
+			
+			.btn-secondary {
+				text-transform: uppercase;
+				@include button-size($btn-padding-y, $btn-padding-x, 1.4rem, $btn-border-radius);
+			}
+			
+			.align-wrapper {
+				height: 4rem;
+				
+			
+				@include media-breakpoint-up(lg) {
+					&.link {
+						text-align: left;
+					}
+				}
+				
+				@include media-breakpoint-up(lg) {
+					height: 6.5rem;
+					padding-left: 0px;
+					padding-right: 3rem;
+				}
+			}
+		}
+		.date-holder {
+			float: left;
+		}
+		
+		.text-size {
+			font-size: 1.1rem;
+			line-height: 2rem;
+			text-transform: uppercase;
+			//margin-bottom: 3rem;
+			margin-left: 15px;
+			
+			@include media-breakpoint-up(md) {
+				margin-left: 0px;
+			}
+			
+			.control {
+  				width: 20px;
+  				height: 20px;
+  				background: rgba(134, 136, 138, 0.5);
+  				position: relative;
+				display: block;
+				text-indent: -1000px;
+				overflow: hidden;
+				
+				&:hover {
+					background: rgba(134, 136, 138, 0.5);
+					
+					@include media-breakpoint-up(md) {
+						background: rgba(134, 136, 138, 1);
+					}
+				}
+				
+				&:focus {
+					background: rgba(134, 136, 138, 0.5);
+				}
+				
+				&::after {
+					content: " ";
+  					position: absolute;
+				  	display: block;
+				  	background-color: #fff;
+				  	height: 2px;
+				  	margin-top: -1px;
+				  	top: 50%;
+				  	left: 5px;
+				  	right: 5px;
+				  	z-index: 9;
+				}
+				
+				&:before {
+					content: " ";
+					position: absolute;
+					display: block;
+					background-color: #fff;
+					width: 2px;
+					margin-left: -1px;
+					left: 50%;
+					top: 5px;
+					bottom: 5px;
+					z-index: 9;
+				}
+				
+				&.minus {
+					&:before {
+						content: none;
+					}
+				}
+			}
+		}
+		
+		.overlay {
+			background: rgba(0, 0, 0, 0.8) none repeat scroll 0 0;
+			display: block;
+			height: 100%;
+			left: 0;
+			position: fixed;
+			top: 0;
+			width: 100%;
+			z-index: 999;
+			display: none;
+		}
+		
+		.search-icon {
+			background-color: transparent;
+			background-image: url(components/images/search-icon.png);
+			background-repeat: no-repeat;
+			display: block;
+			width: 20px;
+			height: 20px;
+			border: none;
+			text-indent: -1000px;
+			overflow: hidden;
+			position: absolute;
+			top: 8px;
+			right: 5px;
+			transition: all 0.4s ease-out 0s;
+			
+			svg {
+				path {
+					fill: #000;
+				}
+			}
+		}
+		
+		.focused {
+			.search-icon {
+				background-image: url(components/images/search-icon-focused.png);
+			}
+		}
+	}
+}

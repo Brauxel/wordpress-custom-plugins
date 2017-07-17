@@ -1,0 +1,27 @@
+.jumbotron {
+	border-radius: 0px;
+	margin-bottom: 0px;
+}
+
+.form-control {
+	font-size: 1.6rem;
+	padding: 0.6rem 1.2rem;
+	
+	@include media-breakpoint-up(sm) {
+		font-size: 1.4rem;
+	}
+}
+
+.navbar-toggler {
+	border: none;
+	
+	.navbar-toggler-icon {
+		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox=\'0 0 32 32\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath stroke=\'rgba(255, 255, 255, 1)\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-miterlimit=\'10\' d=\'M4 8h24M4 16h24M4 24h24\'/%3E%3C/svg%3E");
+		height: 2rem;
+		width: 2rem;
+	}
+}
+
+.align-middle, .align-bottom {
+	display: table-cell;
+}

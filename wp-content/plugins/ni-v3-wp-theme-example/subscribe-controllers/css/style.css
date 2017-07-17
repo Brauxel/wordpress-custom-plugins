@@ -1,0 +1,150 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	margin: 0;
+	padding: 0;
+	background-color: #f1f1f2;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	color: #404041;
+	font-size: 11pt;
+	line-height: 14pt;
+	min-width: 320px;
+}
+
+img{
+	max-width: 100%;
+	height: auto;
+}
+
+.clear{
+	clear: both;
+}
+
+p{
+	margin: 0 0 15px 0;
+}
+
+
+p.lessgap{
+	margin: 0 0 8px 0;
+}
+
+a, a:visited{
+	color: #EF6723;
+}
+
+.wrapper{
+	width: 96%;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px 0;
+}
+
+.nilogo{
+	margin-bottom: 10px;
+}
+
+.whitepanel{
+	background-color:rgba(255,255,255,1.00);
+	padding: 3%;
+	margin-bottom: 15px;
+}
+
+.logos{
+	float: left;
+	width: 40%;
+}
+
+.logos img{
+	width: 100%;
+	height: auto;
+	max-width: 245px;
+}
+
+.whitepanel:after{
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+
+form, fieldset{
+	border: none;
+	background: none;
+}
+
+form{
+	float: left;
+	width: 60%;
+}
+
+input{
+	background-color: #f1f1f2;
+	border: solid 1px #E3E3E3;
+	padding: 10px;
+	font-size: 1em;
+}
+
+label{
+	font-weight: bold;
+	font-size: 11pt;
+}
+
+input[type="text"]{
+	width: 100%;
+	-webkit-box-sizing: border-box; /* Safari 3.0 - 5.0, Chrome 1 - 9, Android 2.1 - 3.x */
+  -moz-box-sizing: border-box;    /* Firefox 1 - 28 */
+  box-sizing: border-box;         /* Safari 5.1+, Chrome 10+, Firefox 29+, Opera 7+, IE 8+, Android 4.0+, iOS any */
+}
+
+input[type="submit"]{
+	border: none;
+	background-color: #EF6723;
+	color: #fff;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 11pt;
+	padding: 10px 20px;
+	width: auto;
+	cursor: pointer;
+}
+
+ul{
+	margin: 10px 0px;
+}
+
+ul li{
+	margin: 0 0 10px 0;
+}
+
+#unsubform input[type="submit"]{
+	margin-top: 10px;
+	background-color: #888;
+}
+
+@media (max-width: 650px) {
+	.whitepanel {
+		  padding: 2%;
+		}
+		
+	.whitepanel.morepad {
+		padding: 4%;
+		}
+	
+}
+
+
+@media (max-width: 500px) {
+	.logos{
+		display: none;
+	}
+	form{
+		width: 100%;
+	}
+	.wrapper{
+		width: 94%;
+	}
+}

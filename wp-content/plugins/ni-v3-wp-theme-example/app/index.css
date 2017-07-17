@@ -1,0 +1,210 @@
+/*
+	If you choose not to use the sourcemaps and wish to track
+	styles in each SCSS file using the parentClass, you can
+	reference the file based on the parent class/ID
+*/
+
+/*
+	Import the boostrap variables, this is a core file 
+	and should not be touched. Hence, it is imported from the 
+	node_module directly. Use the _custom.scss that follows to
+	overwrite booststrap variables
+*/
+@import "~bootstrap/scss/_variables.scss";
+
+/*
+	Import the custom variables. 
+	Use the this file to overwrite booststrap variables
+*/
+@import "./components/scss/_custom.scss";
+
+/*
+	Create the fontface kits for non web-safe fonts 
+	@font Avenir Regular
+*/
+@import "./components/scss/_fonts.scss";
+
+/*
+	Control the mixins that we use in out custom styles. 
+	Helps optimise the final CSS file
+*/
+@import "./components/scss/boostrap/bootstrap.scss";
+
+/*
+	Overwrites bootstrap CSS
+	Currently overwrites:
+	@class .jumbotron
+	@class .form-control
+	@class .navbar-toggler
+	@class .align-middle
+	@class .align-bottom
+*/
+@import "./components/scss/_resets.scss";
+
+
+@import "./components/scss/_globals.scss";
+
+/*
+	Header Styles
+	@parentClass header
+*/
+@import "./components/scss/_header.scss";
+
+/*
+	Preview Alert Styles
+	@parentClass footer
+*/
+@import "./components/scss/_alert.scss";
+
+/*
+	Footer Styles
+	@parentClass footer
+*/
+@import "./components/scss/_footer.scss";
+
+/*
+	Share Button Styles
+	@parentClass .sb-social
+*/
+@import "./components/scss/_share-button.scss";
+
+/*
+	'Email a friend' popup Styles
+	@parentClass .email-popup
+*/
+@import "./components/scss/_email-popup.scss";
+
+/*
+	Styles the gravity forms
+	@parentClass .gform_wrapper
+*/
+@import "./components/scss/_gforms.scss";
+
+/*
+	Styles the Optin Monster Popups
+	@parentClass .optin-monster-custom
+*/
+@import "./components/scss/_optin-monster.scss";
+
+/*
+	Styles the Sidebar ie sidebar.php
+	@parentClass .sidebar
+*/
+@import "./components/scss/_sidebar.scss";
+
+/*
+	Resets/styles classes set by WP plugins/admin
+	The components that are targetted are listed below
+	@component .wp-pagenavi - Page Navigation plugin
+*/
+@import "./components/scss/_wp-resets.scss";
+
+/*
+	Styles the Home Page
+	@parentClass .page-template-landing
+*/
+@import "./components/scss/_home.scss";
+
+/*
+	Styles the Banner component
+	@parentClass .banner
+*/
+@import "./components/scss/_banner.scss";
+
+/*
+	Styles the Video Banner component
+	@parentClass #video-banner-container
+*/
+@import "./components/scss/_video-banner.scss";
+
+/*
+	Styles the Subscription Components
+	@parentClass .page-template-subscribe-template
+	@parentClass .page-template-email-preferences
+	@parentClass .page-template-contact-template
+*/
+@import "./components/scss/_manage-subscription.scss";
+
+/*
+	Styles the default template ie page.php
+	@parentClass .page-template-default
+*/
+@import "./components/scss/_default-template.scss";
+
+/*
+	Styles the 404 template ie 404.php
+	@parentClass .error404
+*/
+@import "./components/scss/_404.scss";
+
+/*
+	Styles the blog listing template ie internal-home.php
+	@parentClass .page-template-internal-home
+*/
+@import "./components/scss/_blog.scss";
+
+/*
+	Styles the single post template ie single.php
+	@parentClass .single
+*/
+@import "./components/scss/_single.scss";
+
+/*
+	Styles the company template ie taxonomy-company.php
+	@parentClass .tax-company
+*/
+@import "./components/scss/_company.scss";
+
+/*
+	Styles the search template ie taxonomy-company.php
+	@parentClass #search-page
+*/
+@import "./components/scss/_search.scss";
+
+/*
+	Styles the contact template ie contact-template.php
+	@parentClass .page-template-contact-template
+*/
+@import "./components/scss/_contact.scss";
+
+/*
+	Sets WordPress styles are introduced from WP 2.6
+	@Ref: https://codex.wordpress.org/CSS
+*/
+@import "./components/scss/_wordpress.scss";
+
+/*
+	Sets styles for the Next Investors subsite
+	@parentClass .blog-1
+*/
+@import "./components/scss/_ni.scss";
+
+/*
+	Sets styles for the Next Mining Boom subsite
+	@parentClass .blog-9
+*/
+@import "./components/scss/_nmb.scss";
+
+/*
+	Sets styles for the Next Oil Rush subsite
+	@parentClass .blog-10
+*/
+@import "./components/scss/_nor.scss";
+
+/*
+	Sets styles for the Next Tech Stock subsite
+	@parentClass .blog-12
+*/
+@import "./components/scss/_nts.scss";
+
+/*
+	Sets styles for the Next Small Cap subsite
+	@parentClass .blog-13
+*/
+@import "./components/scss/_nsc.scss";
+
+/*
+	Sets styles for the Next Biotech subsite
+	@parentClass .blog-15
+*/
+@import "./components/scss/_nbt.scss";

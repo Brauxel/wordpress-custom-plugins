@@ -1,0 +1,27 @@
+body {
+	.wp-pagenavi {
+		display: block;
+		text-align: center;
+		margin-top: 3rem;
+		margin-bottom: 3rem;
+		
+		&::after {
+			clear: both;
+		}
+		
+		a, span {
+			border: 1px solid #bfbfbf;
+			margin: 2px;
+			padding: 3px 5px;
+			text-decoration: none;
+			
+			&:hover {
+				color: $white;
+			}
+		}
+		
+		.current {
+			color: $white;
+		}
+	}
+}

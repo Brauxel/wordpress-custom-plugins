@@ -1,0 +1,383 @@
+.page-template-landing {
+	header {
+		.logo {
+			display: none !important;
+		}
+		
+		@include media-breakpoint-up(lg) {
+			&.scrolled, &.white {
+				background-color: #000;
+				border-bottom: none;
+
+				a {
+					color: #fff;
+
+					&:hover {
+						color: #fff;
+					}
+				}
+
+				.form-control {
+					background-color: transparent;
+					color: #fff;
+					
+					&::-webkit-input-placeholder { color: #fff; }
+					&::-moz-placeholder { color: #fff; }
+					&::-ms-input-placeholder { color: #fff; }
+				}
+				
+				.search-icon {
+					background-image: url(components/images/search-icon.png);
+				}
+				
+				.focused {
+					.search-icon {
+						background-image: url(components/images/search-icon-focused.png);
+					}
+				}
+			}
+		}
+	}
+	
+	.banner-content {
+		text-align: center;
+	}
+	&.blog-1 {
+		main {
+			padding-bottom: 0rem;
+		}
+	}
+	
+	.dark {
+		background-color: $dark-panel-bg;
+		font-size: 1.6rem;
+		color: #ccc;
+		padding-top: 7rem;
+		padding-bottom: 7rem;
+		
+		@include media-breakpoint-up(lg) {
+			padding-top: 9rem;
+			padding-bottom: 9rem;
+		}
+		
+		.btn-outline-primary {
+			@include button-size($btn-padding-y, 3rem, $btn-primary-font-size, $btn-border-radius);
+		}
+		
+		&.get-updates {
+			h3 {
+				font-size: 1.3rem;
+				
+				@include media-breakpoint-up(md) {
+					font-size: 2rem;
+				}
+			}
+			
+			.gform_wrapper {
+				margin-top: 0px;
+				margin-bottom: 0px;
+				
+				form {
+					padding: 0px;
+					
+					.gform_heading {
+						text-align: center;
+						
+						@include media-breakpoint-up(md) {
+							text-align: left;
+						}
+						
+						h3 {
+							margin-top: 0px;
+							margin-bottom: 2rem;
+						}
+						
+						.gform_description {
+							margin-bottom: 1.3rem;
+							font-size: 1.4rem;
+							
+							@include media-breakpoint-up(md) {
+								font-size: 1.6rem;
+							}
+						}
+					}
+					
+					.gform_body {
+						padding-top: 0px;
+						padding-bottom: 0px;
+						
+						.gform_fields {
+							.gfield {
+								@include media-breakpoint-up(xl) {
+									flex: 0 0 38.6%;
+									max-width: 38.6%;
+								}
+								
+								&.manage-controls {
+									width: 100%;
+									overflow: hidden;
+									flex: 0 0 100%;
+									max-width: 100%;
+									
+									@include media-breakpoint-up(xl) {
+										flex: 0 0 77.9%;
+										max-width: 77.9%;
+									}
+									
+									.btn-outline-primary {
+										width: 289px;
+										margin: 0 auto;
+										margin-top: 1.5rem;
+										display: block;
+										@include button-size($btn-padding-y, 1rem, 1.4rem, $btn-border-radius);
+										
+										&.keep-me-informed {
+											visibility: hidden !important;
+											transition: all 0.2s ease-out 0s;
+											
+											&.show {
+												visibility: visible !important;
+											}
+										}
+										
+										@include media-breakpoint-up(md) {
+											width: 420px;
+											float: left;
+										}
+									}
+									.manage {
+										text-align: center;
+										display: block;
+										color: inherit;
+										text-decoration: underline;
+										text-align: center;
+										display: block;
+										text-transform: uppercase;
+										opacity: 0.6;
+										font-size: 1.3rem;
+										padding:  0.5rem 1rem;
+										margin-top: 1.5rem;
+										font-family: $font-family-sans-serif;
+										
+										@include media-breakpoint-up(md) {
+											float: right;
+										}
+									}
+								}
+								
+								&.options {
+									flex: 0 0 100%;
+									max-width: 100%;
+									display: none;
+									
+									.gfield_checkbox {
+										label {
+											margin-left: 0px;
+
+											&::before {
+												left: auto;
+												right: 10px;
+												width: 35px;
+												height: 35px;
+												top: auto;
+												margin-top: 30px;
+
+												@include media-breakpoint-up(lg) {
+													right: 25%;
+												}
+											}
+										}
+
+										@include media-breakpoint-up(md) {
+											flex: 0 0 100%;
+											max-width: 100%;
+										}
+										
+										.gchoice_1_3_6 {
+											label {
+												&::before {
+													content: none;
+												}
+											}
+										}
+										
+										.gchoice_1_3_7 {
+											label {
+												margin-left: 45px;
+												
+												&::before {
+													right: auto;
+													left: 20px;
+													margin-top: 16px;
+												}
+											}
+										}
+									}
+									
+								}
+								
+								.gfield_label {
+									margin-top: 3rem;
+								}
+								
+								.ginput_container_checkbox {
+									.gfield_checkbox {
+										li {
+											margin-top: 3rem;
+											
+											@include media-breakpoint-up(sm) {
+												width: 80%;
+											}
+
+											@include media-breakpoint-up(md) {
+												width: 50%;
+											}
+
+											@include media-breakpoint-up(lg) {
+												width: 40%;
+											}
+											
+											input[type="checkbox"] {
+												float: right;
+												margin-top: 2rem;
+											}
+											
+											label {
+												font-size: 1.8rem;
+												font-family: $font-family-sans-serif;
+											}
+											
+											&.gchoice_1_3_6 {
+												input[type="checkbox"] {
+													display: none;
+												}
+											}
+											
+											&:last-child {
+												width: 100%;
+												
+												input[type="checkbox"] {
+													float: left;
+													margin-top: 0.2rem;
+												}
+											}
+										}
+										
+									}
+								}
+							}
+						}
+					}
+					
+					.gform_footer {
+						margin-top: 3rem;
+						display: none;
+						
+						.btn-outline-primary {
+							margin-top: 2rem;
+							display: block;
+							width:  100%;
+
+							@include button-size($btn-padding-y, 3rem, 1.4rem, $btn-border-radius);
+							
+							@include media-breakpoint-up(md) {
+								display: inline-block;
+								width: 250px;
+							}
+						}
+					}
+				}
+			}
+			
+			.form-control {
+				margin-bottom: 10px;
+			}
+		}
+	}
+	
+	#keep-me-informed {
+		&.dark {
+			padding-top: 10rem;
+			padding-bottom: 10rem;
+			color: $white;
+			
+			@include media-breakpoint-up(lg) {
+				padding-top: 6.5rem;
+				padding-bottom: 7rem;
+			}
+		}
+	}
+	
+	.panel {
+		background-position: center center;
+		background-size: cover;
+		padding-top: 65px;
+		padding-bottom: 65px;
+		color: $white;
+		position: relative;
+		
+		.overlay {
+			position: absolute;
+			display: block;
+			background: rgba(0, 0, 0, 0.4) none repeat scroll 0 0;
+			z-index: 1;
+		}
+		
+		.container {
+			position: relative;
+			z-index: 2;
+		}
+		
+		h3 {
+			font-family: $font-family-sans-serif;
+			text-transform: none;
+			line-height: 1.4;
+		}
+		
+		.img-fluid {
+			width: 100%;
+			
+			@include media-breakpoint-up(sm) {
+				width: 60%;
+			}
+		}
+		
+		.btn-outline-primary {
+			@include button-size($btn-padding-y, 3rem, $btn-primary-font-size, $btn-border-radius);
+		}
+		
+		@include media-breakpoint-up(lg) {
+			padding-top: 120px;
+			padding-bottom: 190px;
+		}
+		
+		&.nmb-panel {
+			background-image:url(components/images/banners/nmb_panel.jpg);
+		}
+		&.nor-panel {
+			background-image:url(components/images/banners/oil-panel.jpg);
+		}
+		&.nts-panel {
+			background-image:url(components/images/banners/techstock-panel.jpg);
+			position: relative;
+			
+			.overlay {
+				background: rgba(0, 0, 0, 0.25);
+			}
+		}
+		&.nsc-panel {
+			background-image:url(components/images/banners/smallcap-panel.jpg);
+		}
+		&.nbt-panel {
+			background-image:url(components/images/banners/nbt-panel.jpg);
+			
+			.overlay {
+				background: rgba(0, 0, 0, 0.3);
+			}
+		}
+		&.raisebook-panel {
+			background-image:url(components/images/banners/raisebook-panel.jpg);
+			text-align: center;
+		}
+	}
+}
