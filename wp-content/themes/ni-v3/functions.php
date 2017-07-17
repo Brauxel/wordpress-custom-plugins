@@ -12,10 +12,10 @@ http://stocksdigital.com/
   * Make site options as global variables, so we can access them
   * in header.php and footer.php rendered via function calls:<br>
   * get_header() and get_footer(), hence are not run in global scope
-  @var1 $formID Sets the main Form ID for each subsite
-  @var2 $sidebarFormId Sets the secondary Form ID for each subsite
-  @var3 $footerFormsTitle Sets the Footer form title for each subsite
-  @var4 $logo Sets the logo for each subsite
+  * @var1 $formID Sets the main Form ID for each subsite
+  * @var2 $sidebarFormId Sets the secondary Form ID for each subsite
+  * @var3 $footerFormsTitle Sets the Footer form title for each subsite
+  * @var4 $logo Sets the logo for each subsite
 **/
 global $formID;
 global $sidebarFormId;
