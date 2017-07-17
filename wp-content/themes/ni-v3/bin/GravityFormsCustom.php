@@ -30,35 +30,5 @@ class GravityFormsCustom {
 	public function generate_diclaimer( $button, $form ) {
 		return $button .= '<p class="mt-5 disclaimer-rb">'. $this->disclaimer .'</p>';
 	}
-	
-	public function set_gtm_tracking() {
-		add_action( 'gform_post_submission_'. $this->formID, array( $this, 'gf_gtm_tracking' ), 10, 2);
-	}
-	
-	
-	  /**
-	  * GTM data layer push for gravity forms contact form
-	  */
-	 /**
-	  * Pushes a submission variables to the GTM dataLayer
-	  * Also pushes the event label for use in GTM tracking
-	  * @param  Array $form  Form data
-	  * @return null
-	  */
-	public function gf_gtm_tracking( $form ) {
-		$eventLabel = 'form_'.$form['id'];
-	?>
-			<script type="text/javascript">
-				 // var eventLabel = $('#event_label').val();
-				 window.dataLayer = window.dataLayer || [];
-				 window.dataLayer.push({
-				   'event' : 'gravityFormSubmit',
-				   'eventCategory' : 'Form',
-					'eventAction': 'Submit',
-					'eventLabel': '<?= $eventLabel; ?>'
-				 });
-			</script>	
-	<?php              
-	}
 }
 ?>

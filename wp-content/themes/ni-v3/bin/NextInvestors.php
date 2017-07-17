@@ -29,6 +29,7 @@ class NextInvestors {
 		 * This function is used to register the stylesheets and scripts specific to the Next Investors V3 theme
 		 *
 		 * The registerd stylesheets and scripts have to enqueued in the init() function
+		 @
 		 */
 		
 		// Sets theme name passed via instance in functions.php
@@ -135,6 +136,7 @@ class NextInvestors {
 		 * This function should be hooked into WordPress' wp_enqueue_scripts in the init() of the current class
 		 *
 		 * The scripts are enqueued only if the current page is public facing, hence not made available in the admin side
+		 @
 		*/
 		if ( !is_admin() ) {
 		   /**
@@ -156,6 +158,7 @@ class NextInvestors {
 		 * This function should be called in the functions.php
 		 *
 		 * Ref: https://developer.wordpress.org/reference/functions/register_nav_menus/
+		 @
 		*/
 		register_nav_menus( array(
 			'main' => 'Main Menu',
@@ -170,6 +173,7 @@ class NextInvestors {
 		 * This function should be called in the functions.php
 		 *
 		 * Ref: https://developer.wordpress.org/reference/functions/add_image_size/
+		 @
 		*/
 		add_image_size( 'related_thumb', 260, 146, false );
 	}
@@ -181,10 +185,10 @@ class NextInvestors {
 	 *
 	 * It's called in single.php and taxonomy-company.php
 	 *
-	 * @param1 string:$str, the string passed to the function for truncation
-	 * @param2 int:$chars, the number of character that the string is limited to.
-	 * @param3: bool:$to_space a boolean value, if true the string is truncated to the final space before the count else it sticks to the number of characters
-	 * @param4 string:$replacement optional argument that defines the characters that are meant to replace the truncated string
+	 @param1 string:$str, the string passed to the function for truncation
+	 @param2 int:$chars, the number of character that the string is limited to.
+	 @param3: bool:$to_space a boolean value, if true the string is truncated to the final space before the count else it sticks to the number of characters
+	 @param4 string:$replacement optional argument that defines the characters that are meant to replace the truncated string
 	*/
 	public function truncateString($str, $chars, $to_space, $replacement="...") {
 		if( $chars > strlen($str) ) return $str;
@@ -207,7 +211,7 @@ class NextInvestors {
 	 *
 	 * It's called in 404.php and taxonomy-company.php
 	 *
-	 * @param1 int:$count, optional argument that sets the number of latest posts to fetch, defaults to 3
+	 @param1 int:$count, optional argument that sets the number of latest posts to fetch, defaults to 3
 	*/
 	public function recent_posts($count = 3) {
 		global $wpdb;

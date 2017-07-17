@@ -186,7 +186,6 @@ function validateEmail(isEmail) {
 		});
 	});
 	
-	
 	// This is a temporary fix as per Jason's feedback, ideally the HTML markup of the <div> will actually have to be re-written. 
 	$('.raisebook-block').click(function() {
 		window.open("https://raisebook.com/");
@@ -239,5 +238,34 @@ function validateEmail(isEmail) {
 		} else {
 			$('.responsive-share-buttons').fadeIn('fast');
 		}
+	});
+	
+	/*
+		* Ref: https://www.gravityhelp.com/documentation/article/gform_confirmation_loaded/
+		* Due to the multiple form instances (which generates new IDs for instances of the form), 
+		* it is impossible to use JS to capture the original ID of the form.
+		* Hence, we use the ID of the confirmation message with a structure: 'gform_confirmation_message_45'
+		* Use the string edit functions we can isolate the number alone ie the form_id = 45
+	*/
+    $(document).bind('gform_confirmation_loaded', function() {
+		// To begin with we get the ID of the confirmation wrapper.
+		var identifier = $('.gform_confirmation_message').attr('id');
+		
+		// We get the index of the last occurence of the '_' char
+		var indiced =  $('.gform_confirmation_message').attr('id').lastIndexOf("_");
+		
+		// We get the lenght of the id
+		var idLen =  $('.gform_confirmation_message').attr('id').length;
+		
+		// We splice the id to only return the form ID
+		var formID = 'form_' + identifier.slice(indiced + 1, idLen);
+		
+		window.dataLayer = window.dataLayer || [];
+		window.dataLayer.push({
+			'event' : 'gravityFormSubmit',
+		    'eventCategory' : 'Form',
+			'eventAction': 'Submit',
+			'eventLabel': formID
+		});
 	});
 })( jQuery );

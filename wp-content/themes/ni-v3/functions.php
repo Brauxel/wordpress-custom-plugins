@@ -12,10 +12,10 @@ http://stocksdigital.com/
   * Make site options as global variables, so we can access them
   * in header.php and footer.php rendered via function calls:<br>
   * get_header() and get_footer(), hence are not run in global scope
-  * @var1 $formID Sets the main Form ID for each subsite
-  * @var2 $sidebarFormId Sets the secondary Form ID for each subsite
-  * @var3 $footerFormsTitle Sets the Footer form title for each subsite
-  * @var4 $logo Sets the logo for each subsite
+  @var1 $formID Sets the main Form ID for each subsite
+  @var2 $sidebarFormId Sets the secondary Form ID for each subsite
+  @var3 $footerFormsTitle Sets the Footer form title for each subsite
+  @var4 $logo Sets the logo for each subsite
 **/
 global $formID;
 global $sidebarFormId;
@@ -64,7 +64,7 @@ $GLOBALS[ 'repAvoider' ] = array();
 	* @param string:$themeName
 	* @param string:$version
 */
-$nextinvestors = new NextInvestors( 'next-investors-v3', '3.0.2', (string)get_current_blog_id() );
+$nextinvestors = new NextInvestors( 'next-investors-v3', '3.0.23', (string)get_current_blog_id() );
 $nextinvestors->init();
 $nextinvestors->register_menus();
 $nextinvestors->register_image_sizes();
@@ -78,8 +78,6 @@ $company->init();
 $gform1 = new GravityFormsCustom( '1' );
 add_filter( 'gform_submit_button', array( $gform1, 'make_button' ), 10, 2 );
 $gform1->add_discalimer('Joining Raisebook will give you free access to opportunities not normally available to general retail investors â€“ however you must qualify as a sophisticated investor under Section 708 of the Corporations Act. These opportunities are as diverse as stock placements, seed capital raisings, IPOs, options underwritings. Plus a whole host of other high risk, high reward investment opportunities not available to the general public (careful this stuff is high risk!).');
-//add_action('gform_post_submission', array( $gform1, 'gf_gtm_tracking' ), 10, 2);
-
 
 // Enable Shortcodes for Category/Taxonomy Description
 add_filter( 'term_description', 'shortcode_unautop');

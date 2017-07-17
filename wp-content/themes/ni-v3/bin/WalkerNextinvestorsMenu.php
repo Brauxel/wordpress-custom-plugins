@@ -1,7 +1,7 @@
 <?php
 /*
 	* Walker Function to add Bootstrap support to WordPress Menu
-	* @Reference header.php
+	@Reference header.php
 */
 class Walker_Nextinvestors_Menu extends Walker {
 
