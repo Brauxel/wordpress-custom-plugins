@@ -158,7 +158,6 @@ class NextInvestors {
 		 * This function should be called in the functions.php
 		 *
 		 * Ref: https://developer.wordpress.org/reference/functions/register_nav_menus/
-		 @
 		*/
 		register_nav_menus( array(
 			'main' => 'Main Menu',
@@ -173,7 +172,6 @@ class NextInvestors {
 		 * This function should be called in the functions.php
 		 *
 		 * Ref: https://developer.wordpress.org/reference/functions/add_image_size/
-		 @
 		*/
 		add_image_size( 'related_thumb', 260, 146, false );
 	}
