@@ -29,7 +29,6 @@ class NextInvestors {
 		 * This function is used to register the stylesheets and scripts specific to the Next Investors V3 theme
 		 *
 		 * The registerd stylesheets and scripts have to enqueued in the init() function
-		 @
 		 */
 		
 		// Sets theme name passed via instance in functions.php
@@ -136,7 +135,6 @@ class NextInvestors {
 		 * This function should be hooked into WordPress' wp_enqueue_scripts in the init() of the current class
 		 *
 		 * The scripts are enqueued only if the current page is public facing, hence not made available in the admin side
-		 @
 		*/
 		if ( !is_admin() ) {
 		   /**
