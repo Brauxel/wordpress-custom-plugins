@@ -91,7 +91,6 @@ class Related_Posts_Plus_Admin {
 		 * The Related_Posts_Plus_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
-		 @
 		 */
 
 		 /**
@@ -196,7 +195,6 @@ class Related_Posts_Plus_Admin {
 		 * class.
 		 *
 		 * The hooks are defined in $Related_Posts_Plus->define_admin_hooks()		 
-		 @
 		 */
 		
 		 /**
@@ -227,7 +225,6 @@ class Related_Posts_Plus_Admin {
 		 * class.
 		 *
 		 * The hooks are defined in $Related_Posts_Plus->define_admin_hooks()		 
-		 @
 		 */
 		
 		 /**
@@ -397,7 +394,6 @@ class Related_Posts_Plus_Admin {
 		 * class.
 		 *
 		 * The hooks are defined in $Related_Posts_Plus->define_admin_hooks()		 
-		 @
 		 */
 		
 		if ( isset( $_POST['related_post'] ) ) {
