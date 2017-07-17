@@ -375,11 +375,12 @@ class Related_Posts_Plus_Admin {
 		foreach($categories as $category) {
 			$id = $category->term_ID;
 			$this->term_taxonomy_ids_array = get_posts( array('posts_per_page' => -1, category => $category->term_id, 'post_type' => 'post') );
-			die(print_r($this->term_taxonomy_ids_array));
 		}
 		
+		$this->term_ids_array = get_categories();
 		
-		$this->term_taxonomy_ids_array = get_posts( array('posts_per_page' => -1, 'post_type' => 'post') );
+		
+		//$this->term_taxonomy_ids_array = get_posts( array('posts_per_page' => -1, 'post_type' => 'post') );
 	}
 	
 	public function save( $post ) {
