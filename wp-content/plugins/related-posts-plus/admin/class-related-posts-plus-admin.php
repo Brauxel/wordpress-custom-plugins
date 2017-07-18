@@ -124,7 +124,6 @@ class Related_Posts_Plus_Admin {
 		 * class.
 		 *
 		 * The hooks are defined in $Related_Posts_Plus->define_admin_hooks()	
-		 @
 		 */
 		
 		 /**
@@ -155,7 +154,6 @@ class Related_Posts_Plus_Admin {
 		 * class.
 		 *
 		 * The hooks are defined in $Related_Posts_Plus->define_admin_hooks()		 
-		 @
 		 */
 
 		 /**
