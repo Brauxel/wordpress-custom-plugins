@@ -38,10 +38,10 @@
 		
 		var data = {
 			action: my_ajax_args.ajaxaction,
+			pid: my_ajax_args.pid,
 			tid: term_id,
-			relations: my_ajax_args.relations,
-			nonce: my_ajax_args.nonce,
-			pid: my_ajax_args.pid
+			postsdata: my_ajax_args.post_array,
+			nonce: my_ajax_args.nonce			
 		};
 		
 		//event.preventDefault();

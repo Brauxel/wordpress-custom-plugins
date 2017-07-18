@@ -48,11 +48,7 @@ class Related_Posts_Plus_Admin {
 	 * @var      array    $post_array    The data for the plugin with a structure $posts_array['category_id'] = array(['post_id'] => post_title).
 	 */
 	protected $post_array;
-	protected $term_ids_array;
-	protected $term_taxonomy_ids_array;
-	protected $related_posts;
-	protected $params;
-
+	
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -164,8 +160,10 @@ class Related_Posts_Plus_Admin {
 		  * @param4   string:$ver   $this->version   The current version of the plugin set in includes/class-related-posts-plus.php Related_Posts_Plus->version
 		  * @param5   bool:$in_footer  Loads JS in <footer>
 		 **/
+		//wp_register_script( 'admincore', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin.js', array( 'jquery' ), $this->version, true);
+		//wp_register_script( $this->plugin_name.'_adminajax', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin-ajax.js', array( 'jquery' ), $this->version, true);
+		
 		wp_register_script( $this->plugin_name.'_core', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin.js', array( 'jquery' ), $this->version, false );
-		wp_register_script( $this->plugin_name.'_ajax', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin-ajax.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -196,8 +194,39 @@ class Related_Posts_Plus_Admin {
 		  * @param1   string:$handle   Unique Name of the scripts
 		 **/
 		wp_enqueue_script( $this->plugin_name.'_core' );
-		wp_enqueue_script( $this->plugin_name.'_ajax' );
+		wp_enqueue_script( $this->plugin_name.'my-ajax', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin-ajax.js', array( 'jquery' ), $this->version, true );
 
+	}
+	
+	public function get_data()  {
+		/**
+		 * This function is used to generate the data for the admin-specific functionality of the plugin on the posts dashboard
+		 *
+		 * This function should be called in the appropriate place to generate the data before it can be manipulated.
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 */
+		
+		// Ref: https://developer.wordpress.org/reference/functions/get_categories/
+		$term_ids_array = get_categories();
+		
+		// We loop through each of the categories
+		foreach( $term_ids_array as $term ) {
+			// We set a query to get all posts belonging to the individual categories
+			$the_query = new WP_Query( array( 'cat' => $term->term_id ) );
+			
+			if ( $the_query->have_posts() ) {
+				while ( $the_query->have_posts() ) {
+					$the_query->the_post();
+					// A transitionary array with the structure $transition['post_id] = post_title;
+					$transition[get_the_ID()] = get_the_title();
+					
+					// Then we push the transition array into our multidimensional posts_array with the structure $post_array['category_id'] = array(['post_id] => post_title)
+					// The category is our main filter
+					$this->post_array[$term->term_id] = $transition;
+				}
+			}
+		}
 	}
 		
 	/**
@@ -234,8 +263,10 @@ class Related_Posts_Plus_Admin {
 			exit();
 		endif;
 		
-		$screens = array('post');   //limit meta box only to posts
+		// Limit meta box only to posts
+		$screens = array('post');
 		
+		// We loop through the screens and display the meta box on them
 		foreach( $screens as $screen ) {
 			add_meta_box(
 				'related_posts', // Name of the metabox
@@ -249,30 +280,34 @@ class Related_Posts_Plus_Admin {
 	}
 	
 	public function render_posts_meta_box_content( $post ) {
-		$relations = $this->build_relations( $post->ID );
-				
 		// Get the protocol of the current page
 		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
 		
 		// Create a nonce for this action
 		$nonce = wp_create_nonce( 'sd_ajax-' . $post->ID );
 		
+		// Get the categories of the current post
 		$terms = get_the_category();
-		//die(print_r($relations));
 		
-		$this->params = array(
-			// Get the url to the admin-ajax.php file using admin_url()
-			'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ),
-			'ajaxaction' => 'sd_ajax',
-			'pid' => $post->ID,
-			'tid' => $terms,
-			'relations' => $relations,
-			'nonce' => $nonce
+		$params = array(
+			'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ), // Get the url to the admin-ajax.php file using admin_url()			
+			'ajaxaction' => 'sd_ajax', // Register the PHP function that is responsible for handling the AJAX interactions on the server side
+			'pid' => $post->ID, // Pass the post_id as an argument to the JS file that is then passed through to sd_ajax via $_REQUEST
+			'tid' => $terms, // Pass the current categories of the post to the JS file and then to sd_ajax via $_REQUEST
+			'post_array' => $this->post_array, // Pass the data we constructed earlier
+			'nonce' => $nonce // Pass the nonce that is to be checked in the JS file
 		);
-
-		// Print the script to our page
-		wp_localize_script( $this->plugin_name.'my-ajax', 'my_ajax_args', $this->params );
 		
+		/**
+		* We must use wp_localize_script() to pass values into JavaScript object properties, since PHP cannot directly echo values into our JavaScript file
+		*
+		* Ref: https://codex.wordpress.org/Function_Reference/wp_localize_script
+		* @param1 string:The registered script handle you are attaching the data for.
+		* @param1 string:The name of the variable which will contain the data
+		* @param1 array:The data itself.
+		**/
+			
+		wp_localize_script( $this->plugin_name.'my-ajax', 'my_ajax_args', $params );
 	}
 	
 	/**
@@ -281,38 +316,18 @@ class Related_Posts_Plus_Admin {
 	 * @since    1.0.0
 	 */
 	public function sd_ajax( $post ) {
-		global $wpdb;
 		$terms = $_REQUEST['tid'];
 		$post_id = $_REQUEST['pid'];
-		$relations_array = $_REQUEST['relations'];
-		$terms_tax = array();
-		$posts_id = array();
-		$posts = array();
+		$post_array = $_REQUEST['postsdata'];
 		
 		if( $terms ) {
-						
-			foreach( $this->term_taxonomy_ids_array as $key => $value ) {
-				foreach ($terms_tax as $term_tax) {
-					if($value['term_taxonomy_id'] == $term_tax) {
-						array_push($posts_id, $value['object_id']);
-					}
-				}
+			foreach( $term as $term ) {
+				$posts[] = wp_filter_object_list( $post_array, $term );
 			}
-			
-			foreach( $this->post_array as $key => $value ) {
-				foreach ($posts_id as $post_id) {
-					if($value['ID'] == $post_id) {
-						$posts[$value['ID']] = $value['post_title'];
-					}
-				}
-			}
-			
 		} else {
-			foreach( $this->post_array as $key => $value ) {
-				$posts[$value['ID']] = $value['post_title']; 
+			foreach( $post_array as $post ) {
+				$posts[] = $post;
 			}
-			
-			
 		}
 		
 		require_once('partials/related-posts-plus-admin-display.php');
@@ -320,80 +335,5 @@ class Related_Posts_Plus_Admin {
 		// Always exit when doing Ajax
 		die();
 
-	}
-	
-	private function build_relations( $post_id ) {
-		$this->related_posts = get_post_meta( $post_id, 'related_post');
-		
-		if( !empty($this->related_posts[0]) ) {			
-			foreach( $this->related_posts[0] as $related_post ) {
-				$relations[$related_post] = get_the_title($related_post);
-			}
-			return $relations;
-		} else {
-			return NULL;
-		}
-	}
-	
-	public function get_data()  {
-		/**
-		 * This function is used to generate the data for the admin-specific functionality of the plugin on the posts dashboard
-		 *
-		 * This function should be called in the appropriate place to generate the data before it can be manipulated.
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-		
-		// Ref: https://developer.wordpress.org/reference/functions/get_categories/
-		$term_ids_array = get_categories();
-		
-		$this->term_taxonomy_ids_array = get_posts();
-		
-		// We loop through each of the categories
-		foreach( $term_ids_array as $term ) {
-			// We set a query to get all posts belonging to the individual categories
-			$the_query = new WP_Query( array( 'cat' => $term->term_id ) );
-			
-			if ( $the_query->have_posts() ) {
-				while ( $the_query->have_posts() ) {
-					$the_query->the_post();
-					// A transitionary array with the structure $transition['post_id] = post_title;
-					$transition[get_the_ID()] = get_the_title();
-					
-					// Then we push the transition array into our multidimensional posts_array with the structure $post_array['category_id'] = array(['post_id] => post_title)
-					// The category is our main filter
-					$this->post_array[$term->term_id] = $transition;
-				}
-			}
-		}
-	}
-	
-	public function save( $post ) {
-		/**
-		 * This function is used to save the relaed posts by hooking into save_post hook.
-		 * Ref: https://codex.wordpress.org/Plugin_API/Action_Reference/save_post
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Related_Posts_Plus_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Related_Posts_Plus_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 *
-		 * The hooks are defined in $Related_Posts_Plus->define_admin_hooks()		 
-		 */
-		
-		if ( isset( $_POST['related_post'] ) ) {
-		 /**
-		  * This function is used to update metadata of a post with the related_posts' ids as an array
-		  * it is stored in the wp_postsmeta table in your database
-		  * Ref: https://codex.wordpress.org/Function_Reference/update_post_meta
-		  * @param1   int:$post_id   Id of the current post
-		  * @param2:  string:$table_col_name   The name of the column in the table
-		  * @param3 array:$related_posts   Post IDs
-		 **/
-			update_post_meta( $_POST['post_ID'], 'related_post', $_POST['related_post'] );
-		}		
 	}
 }

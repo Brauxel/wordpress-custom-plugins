@@ -172,6 +172,7 @@ class Related_Posts_Plus {
 		
 		//$this->loader->add_action( 'wp', $plugin_admin, 'get_data' );
 		//$this->loader->add_action( 'current_screen', $plugin_admin, 'initial_data' );
+		//$this->loader->add_action( 'wp', $plugin_admin, 'get_data' );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'posts_meta_box' );
 		
 		//$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
