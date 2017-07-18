@@ -39,14 +39,19 @@ class Related_Posts_Plus_Admin {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
-	//private $postID;
 	
-	//public $post_array;
-	public $post_array;
-	private $term_ids_array;
-	private $term_taxonomy_ids_array;
-	private $related_posts;
-	private $params;
+	/**
+	 * The data required for this plugin
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      array    $post_array    The data for the plugin with a structure $posts_array['category_id'] = array(['post_id'] => post_title).
+	 */
+	protected $post_array;
+	protected $term_ids_array;
+	protected $term_taxonomy_ids_array;
+	protected $related_posts;
+	protected $params;
 
 	/**
 	 * Initialize the class and set its properties.
