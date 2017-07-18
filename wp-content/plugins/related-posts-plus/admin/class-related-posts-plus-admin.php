@@ -231,9 +231,7 @@ class Related_Posts_Plus_Admin {
 		  * @param1   string:$handle   Unique Name of the scripts
 		 **/
 		
-		global $post;
-		
-		// Lets generate the array structures
+		// This function call generates the $post_array, it is called in the meta_box so the rest of the page can finish loading before the meta box is rendered
 		$this->get_data();
 		
 		// If admin then continue with the plugin else exit the function			
@@ -297,13 +295,6 @@ class Related_Posts_Plus_Admin {
 		$posts = array();
 		
 		if( $terms ) {
-			foreach( $this->term_ids_array as $key => $value ) {
-				foreach( $terms as $term ) {
-					if( $value['term_id'] == $term ) {
-						array_push($terms_tax, $value['term_taxonomy_id']);
-					}
-				}
-			}
 						
 			foreach( $this->term_taxonomy_ids_array as $key => $value ) {
 				foreach ($terms_tax as $term_tax) {
@@ -350,32 +341,36 @@ class Related_Posts_Plus_Admin {
 	}
 	
 	public function get_data()  {
-		global $wpdb;
-		global $post;
+		/**
+		 * This function is used to generate the data for the admin-specific functionality of the plugin on the posts dashboard
+		 *
+		 * This function should be called in the appropriate place to generate the data before it can be manipulated.
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 */
 		
-		$this->post_array = get_posts( array('posts_per_page' => -1) );
-		$postcat = get_the_category( $post->ID );
+		// Ref: https://developer.wordpress.org/reference/functions/get_categories/
+		$term_ids_array = get_categories();
 		
-		$posts = wp_list_pluck($this->post_array, 'ID');
+		$this->term_taxonomy_ids_array = get_posts();
 		
-		foreach($posts as $post) {
-			$t = get_the_category($post);
-			$ts[$t[0]->term_id] = $post;			
+		// We loop through each of the categories
+		foreach( $term_ids_array as $term ) {
+			// We set a query to get all posts belonging to the individual categories
+			$the_query = new WP_Query( array( 'cat' => $term->term_id ) );
+			
+			if ( $the_query->have_posts() ) {
+				while ( $the_query->have_posts() ) {
+					$the_query->the_post();
+					// A transitionary array with the structure $transition['post_id] = post_title;
+					$transition[get_the_ID()] = get_the_title();
+					
+					// Then we push the transition array into our multidimensional posts_array with the structure $post_array['category_id'] = array(['post_id] => post_title)
+					// The category is our main filter
+					$this->post_array[$term->term_id] = $transition;
+				}
+			}
 		}
-		
-		
-		$categories = get_categories();
-		$queried_object = get_queried_object();
-		
-		foreach($categories as $category) {
-			$id = $category->term_ID;
-			$this->term_taxonomy_ids_array = get_posts( array('posts_per_page' => -1, category => $category->term_id, 'post_type' => 'post') );
-		}
-		
-		$this->term_ids_array = get_categories();
-		
-		
-		//$this->term_taxonomy_ids_array = get_posts( array('posts_per_page' => -1, 'post_type' => 'post') );
 	}
 	
 	public function save( $post ) {
