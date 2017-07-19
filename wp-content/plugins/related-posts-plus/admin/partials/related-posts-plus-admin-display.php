@@ -18,10 +18,10 @@
 	<div class="related-posts-listed">
 		<ul id="listed-posts">
 		<?php 
-			foreach( $posts as $post ):
+			foreach( $custom_posts as $custom_post ):
 		?>
-			<li id="listed-obj"<?php if(in_array(array_keys($posts, $post)[0], array_keys($relations_array))): ?> class="hide"<?php endif; ?>>
-				<a href="#" class="<?php echo array_keys($posts, $post)[0]; ?>"><?php echo $post; ?></a>				
+			<li id="listed-obj">
+				<a href="#"><?php echo $custom_post; ?></a>				
 			</li>
 		<?php endforeach; ?>
 		</ul>

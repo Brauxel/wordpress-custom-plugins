@@ -181,7 +181,7 @@ class Related_Posts_Plus {
 		$this->loader->add_action( 'wp_ajax_nopriv_sd_ajax', $plugin_admin, 'sd_ajax' );
 		//$this->loader->add_action( 'wp', $plugin_admin, 'post_params' );		
 		//$this->loader->add_action( 'private_to_public', $plugin_admin, 'save' );
-		$this->loader->add_action( 'save_post', $plugin_admin, 'save' );
+		//$this->loader->add_action( 'save_post', $plugin_admin, 'save' );
 
 	}
 
