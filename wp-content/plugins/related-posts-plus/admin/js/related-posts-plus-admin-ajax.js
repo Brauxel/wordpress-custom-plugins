@@ -62,6 +62,7 @@
 	}
 	
 	$( document ).ready( function() {
+		
 		if (my_ajax_args.tid !== '') {
 			get_terms(my_ajax_args.tid);
 			taxonomy_check(categories);
@@ -73,18 +74,13 @@
 			if ( $(this).is(':checked') ) {
 				categories.push(parseInt($(this).val()));
 				taxonomy_check( categories );
-			} else if($( "#categorychecklist li input:checked" ).length > 0) {
-				//alert('somthing still checked');
+			} else if( $( "#categorychecklist li input:checked" ).length > 0 ) {
 				categories.splice(categories.indexOf(parseInt($(this).val())), 1);
 				taxonomy_check( categories );
 			} else {
-				//alert('all unchecked');
 				categories = [];
 				taxonomy_check( categories );
 			}
 		});
-		
-		// Prevent the default behavior for the link
-		//event.preventDefault();
 	});
 })( jQuery );
