@@ -292,22 +292,29 @@ class Related_Posts_Plus_Admin {
 		$terms = $_REQUEST['tid'];
 		$post_id = $_REQUEST['pid'];
 		$posts_array = $_REQUEST['postsdata'];
-		//die(var_dump($posts_array));
 		
+		// We check if the post has a category
+		// If null, i.e. no category is selected
 		if( is_null($terms) ) {
 			foreach( $posts_array as $post_array ) {
 				foreach( $post_array as  $postkey => $post ) {
+					// We construct a straight forward single dimensional that has all the posts
+					// array structure $custom_posts['post_id'] = post_title
 					$custom_posts[$postkey] = $post;
 				}
 			}
 		} else {
 			foreach( $terms as $term ) {
+				// If a category is selected, we identify it's posts using the category_id which also serves as the array key
+				// We construct a single dimensional array that has only the posts pertaining to the categories
+				// array structure $custom_posts['post_id'] = post_title
 				foreach( $posts_array[$term] as  $postkey => $post ) {
 					$custom_posts[$postkey] = $post;
 				}
 			}
 		}
 		
+		// Let's render our HTML here
 		require_once('partials/related-posts-plus-admin-display.php');
 
 		// Always exit when doing Ajax
