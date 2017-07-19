@@ -156,7 +156,6 @@ class Related_Posts_Sd {
 		$this->loader->add_action( 'wp_ajax_sd_ajax', $plugin_admin, 'sd_ajax' );
 		$this->loader->add_action( 'wp_ajax_nopriv_sd_ajax', $plugin_admin, 'sd_ajax' );
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_meta_box' );
-		//$this->loader->add_action( 'save_post', $plugin_admin, 'save' );
 		$this->loader->add_action( 'private_to_public', $plugin_admin, 'save' );
 		$this->loader->add_action( 'publish_post', $plugin_admin, 'save' );
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'tax_error_notice' );

@@ -52,7 +52,72 @@ class Related_Posts_Sd_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		
-		//add_action( 'save_post', array( $this, 'save' ) );
+	}
+	
+	/**
+	 * Register the stylesheets for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_styles() {
+
+		/**
+		 * This function is used to register the stylesheets for the admin-specific functionality of the plugin.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Related_Posts_Sd_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Related_Posts_Sd_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 */
+
+		 /**
+		  * This function is used to register the stylesheets that will be enqueued in $this->enqueue_styles()
+		  * Ref: https://codex.wordpress.org/Function_Reference/wp_register_style/
+		  * @param1   string:$handle   Name of the stylesheet. Should be unique
+		  * @parma2   string:$src   Full URL of the stylesheet, or path of the stylesheet relative to the WordPress root directory. In our case we get the URL (with trailing slash) 
+		  * for the plugin __FILE__ passed (https://codex.wordpress.org/Function_Reference/plugin_dir_url)
+		  * @param3   string:$ver   $this->version   The current version of the plugin set in includes/class-related-posts-Sd.php Related_Posts_Sd->version
+		 **/
+		wp_register_style( $this->plugin_name.'_adminstyles', plugin_dir_url( __FILE__ ) . 'css/related-posts-sd-admin.css', null, $this->version, 'all');
+
+	}
+	
+	/**
+	 * Register the scripts for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_scripts() {
+
+		/**
+		 * This function is used to register the scripts for the admin-specific functionality of the plugin.
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Related_Posts_Sd_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Related_Posts_Sd_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 *
+		 * The hooks are defined in $Related_Posts_Sd->define_admin_hooks()		 
+		 */
+
+		 /**
+		  * This function is used to register the scripts that will be enqueued in $this->enqueue_scripts()
+		  * Ref: https://developer.wordpress.org/reference/functions/wp_register_script/
+		  * @param1   string:$handle   Name of the stylesheet. Should be unique
+		  * @parma2   string:$src   Full URL of the stylesheet, or path of the stylesheet relative to the WordPress root directory. In our case we get the URL (with trailing slash) 
+		  * for the plugin __FILE__ passed (https://codex.wordpress.org/Function_Reference/plugin_dir_url)
+		  * @param3   array:$deps   ['jquery'] loads jquery-core(/wp-includes/js/jquery/jquery.js) and jquery-migrate-v1.10.2 (/wp-includes/js/jquery/jquery-migrate.js)
+		  * @param4   string:$ver   $this->version   The current version of the plugin set in includes/class-related-posts-Sd.php Related_Posts_Sd->version
+		  * @param5   bool:$in_footer  Loads JS in <footer>
+		 **/
+		wp_register_script( $this->plugin_name.'_core', plugin_dir_url( __FILE__ ) . 'js/related-posts-sd-admin.js', array( 'jquery' ), $this->version, false );
+		wp_register_script( $this->plugin_name.'_jquery-ui', plugin_dir_url( __FILE__ ) . 'js/jquery-ui.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -64,7 +129,7 @@ class Related_Posts_Sd_Admin {
 	public function enqueue_styles() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
+		 * This function is used to enqueue the stylesheets for the admin-specific functionality of the plugin.
 		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Related_Posts_Sd_Loader as all of the hooks are defined
@@ -73,9 +138,17 @@ class Related_Posts_Sd_Admin {
 		 * The Related_Posts_Sd_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
+		 *
+		 * The hooks are defined in $Related_Posts_Sd->define_admin_hooks()	
 		 */
+		
+		 /**
+		  * This function is used to enqueue the stylesheets
+		  * Ref: https://developer.wordpress.org/reference/functions/wp_enqueue_style/
+		  * @param1   string:$handle   Unique Name of the stylesheet
+		 **/
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/related-posts-sd-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name.'_adminstyles' );
 
 	}
 
@@ -87,7 +160,7 @@ class Related_Posts_Sd_Admin {
 	public function enqueue_scripts() {
 
 		/**
-		 * This function is provided for demonstration purposes only.
+		 * This function is used to enqueue the scripts for the admin-specific functionality of the plugin.
 		 *
 		 * An instance of this class should be passed to the run() function
 		 * defined in Related_Posts_Sd_Loader as all of the hooks are defined
@@ -96,31 +169,19 @@ class Related_Posts_Sd_Admin {
 		 * The Related_Posts_Sd_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
+		 *
+		 * The hooks are defined in $Related_Posts_Sd->define_admin_hooks()		 
 		 */
-
-		global $post;
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/jquery-ui.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name.'my-custom-css', plugin_dir_url( __FILE__ ) . 'js/related-posts-sd-admin.js', array( 'jquery' ), $this->version, false );
-		wp_enqueue_script( $this->plugin_name.'my-ajax', plugin_dir_url( __FILE__ ) . 'js/related-posts-sd-admin-ajax.js', array( 'jquery' ), $this->version, true );
-
-		// Get the protocol of the current page
-		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
 		
-		// Create a nonce for this action
-		$nonce = wp_create_nonce( 'sd_ajax-' . $post->ID );
+		 /**
+		  * This function is used to enqueue the scripts
+		  * Ref: https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts/
+		  * @param1   string:$handle   Unique Name of the scripts
+		 **/
 
-		// Set the ajaxurl Parameter which will be output right before
-		// our ajax-delete-posts.js file so we can use ajaxurl
-		$params = array(
-			// Get the url to the admin-ajax.php file using admin_url()
-			'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ),
-			'ajaxaction' => 'sd_ajax',
-			'pid' => $post->ID,
-			'nonce' => $nonce
-		);
-
-		// Print the script to our page
-		wp_localize_script( $this->plugin_name.'my-ajax', 'my_ajax_args', $params );
+		wp_enqueue_script( $this->plugin_name.'_jquery-ui' );
+		wp_enqueue_script( $this->plugin_name.'_core' );
+		wp_enqueue_script( $this->plugin_name.'my-ajax', plugin_dir_url( __FILE__ ) . 'js/related-posts-sd-admin-ajax.js', array( 'jquery' ), $this->version, true );
 
 	}
 	
@@ -130,24 +191,74 @@ class Related_Posts_Sd_Admin {
 	 * @since    1.0.0
 	 */
 	public function add_meta_box( $post_type ) {
-
+		/**
+		 * This function is used to render a meta box for the admin-specific functionality of the plugin on the posts dashboard
+		 *
+		 * An instance of this class should be passed to the run() function
+		 * defined in Related_Posts_Sd_Loader as all of the hooks are defined
+		 * in that particular class.
+		 *
+		 * The Related_Posts_Sd_Loader will then create the relationship
+		 * between the defined hooks and the functions defined in this
+		 * class.
+		 *
+		 * The hooks are defined in $Related_Posts_Sd->define_admin_hooks()		 
+		 */
+		
+		 /**
+		  * This function is used to enqueue the scripts
+		  * Ref: https://codex.wordpress.org/Plugin_API/Action_Reference/wp_enqueue_scripts/
+		  * @param1   string:$handle   Unique Name of the scripts
+		 **/
+		
 		// If admin then continue with the plugin else exit the function			
 		if ( !is_admin() ):
 			exit();
 		endif;
 		
-		$post_types = array('post');   //limit meta box only to posts
-		if ( in_array( $post_type, $post_types )) {
+		// Limit meta box only to posts
+		$screens = array('post');
+		
+		// We loop through the screens and display the meta box on them
+		foreach( $screens as $screen ) {
 			add_meta_box(
-				'related_posts'
-				,__( 'Related Posts', 'tracker_textdomain' )
-				,array( $this, 'render_meta_box_content' )
-				,$post_type
-				,'advanced'
-				,'high'
+				'related_posts', // Name of the metabox
+				__( 'Related Posts' ), // Title of the metabox
+				array($this, 'render_posts_meta_box_content'),
+				$screen,
+				'advanced',
+				'high'
 			);
 		}
 	}
+	
+	public function render_posts_meta_box_content( $post ) {
+		// Get the protocol of the current page
+		$protocol = isset( $_SERVER['HTTPS'] ) ? 'https://' : 'http://';
+		
+		// Create a nonce for this action
+		$nonce = wp_create_nonce( 'sd_ajax-' . $post->ID );
+
+		// Set the ajaxurl Parameter which will be output right before
+		// our ajax-delete-posts.js file so we can use ajaxurl
+		$params = array(
+			'ajaxurl' => admin_url( 'admin-ajax.php', $protocol ), // Get the url to the admin-ajax.php file using admin_url()
+			'ajaxaction' => 'sd_ajax', // Register the PHP function that is responsible for handling the AJAX interactions on the server side
+			'pid' => $post->ID, // Pass the post_id as an argument to the JS file that is then passed through to sd_ajax via $_REQUEST
+			'nonce' => $nonce // Pass the nonce that is to be checked in the JS file
+		);
+
+		/**
+		* We must use wp_localize_script() to pass values into JavaScript object properties, since PHP cannot directly echo values into our JavaScript file
+		*
+		* Ref: https://codex.wordpress.org/Function_Reference/wp_localize_script
+		* @param1 string:The registered script handle you are attaching the data for.
+		* @param1 string:The name of the variable which will contain the data
+		* @param1 array:The data itself.
+		**/
+		wp_localize_script( $this->plugin_name.'my-ajax', 'my_ajax_args', $params );		
+		
+	}	
 	
 	/**
 	 * This function renders the content for the custom field
@@ -176,12 +287,9 @@ class Related_Posts_Sd_Admin {
 	 * @since    1.0.0
 	 */
 	public function sd_ajax( $post_id ) {
-
 		$term_id = $_REQUEST['tid'];
 		$post_id = $_REQUEST['pid'];
 		
-		die('in');
-
 		require_once('partials/related-posts-sd-admin-display.php');
 
 		echo $html;
@@ -207,12 +315,14 @@ class Related_Posts_Sd_Admin {
 			update_post_meta( $_POST['post_ID'], '_my_related_posts', $_POST['related_post'] );
 
 			// This injects the current post into the meta field '_my_related_posts' of all the older posts that have been related to it
+			// To put it simply, it auto injects the current post ID into the related posts of all the older posts that are related to the current post
+			// Let's begin by filtering through the IDs of the related posts
 			foreach( $_POST['related_post'] as $related_posts ) {
+				// Fetch the related_posts metadata of the isolated ID
 				$currentRelatedPosts = get_post_meta( $related_posts, '_my_related_posts');
 				
-				if (  $currentRelatedPosts != NULL ) {
-					//die('in'.print_r($currentRelatedPosts));
-					
+				// If we the islated post has related posts, we push current post ID onto the array
+				if (  !is_null($currentRelatedPosts) ) {
 					foreach( $currentRelatedPosts as $currentRelatedPost ) {
 						// We should only auto inject if it doesn't already exsit in the array
 						if( in_array($_POST['post_ID'], $currentRelatedPost) ){
@@ -222,13 +332,11 @@ class Related_Posts_Sd_Admin {
 						}
 					}
 					
-					//die('in'.print_r($currentRelatedPost));
-					
+					// We updat the posts meta data
 					update_post_meta( $related_posts, '_my_related_posts', $currentRelatedPost );
 				} else {
-					//die('out'.get_the_ID());
+					// Else we create new related posts metadata for the isolated ID
 					$currentRelatedPost = array( get_the_ID() );
-					//die('out'.print_r($currentRelatedPost));
 					update_post_meta( $related_posts, '_my_related_posts', $currentRelatedPost );
 				}
 			}
@@ -236,6 +344,8 @@ class Related_Posts_Sd_Admin {
 	}
 	
     public function tax_error_notice( $post ) {
+		// We notify the user that they must select a company
+		// It doesn't halt the process, its more a warnging than an error
 		$screen = get_current_screen();
 		if ( $screen->parent_base == 'edit' ) {
 			echo '<div id="error-no-select" class="error">Please select atleast and only one company to proceed</div>';
