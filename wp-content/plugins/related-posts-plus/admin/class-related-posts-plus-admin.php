@@ -162,9 +162,6 @@ class Related_Posts_Plus_Admin {
 		  * @param4   string:$ver   $this->version   The current version of the plugin set in includes/class-related-posts-plus.php Related_Posts_Plus->version
 		  * @param5   bool:$in_footer  Loads JS in <footer>
 		 **/
-		//wp_register_script( 'admincore', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin.js', array( 'jquery' ), $this->version, true);
-		//wp_register_script( $this->plugin_name.'_adminajax', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin-ajax.js', array( 'jquery' ), $this->version, true);
-		
 		wp_register_script( $this->plugin_name.'_core', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
@@ -292,6 +289,7 @@ class Related_Posts_Plus_Admin {
 		$terms = $_REQUEST['tid'];
 		$post_id = $_REQUEST['pid'];
 		$posts_array = $_REQUEST['postsdata'];
+		//die(var_dump($posts_array));
 		
 		// We check if the post has a category
 		// If null, i.e. no category is selected
@@ -334,8 +332,13 @@ class Related_Posts_Plus_Admin {
 		// Ref: https://developer.wordpress.org/reference/functions/get_categories/
 		$term_ids_array = get_categories();
 		
+		//die(var_dump($term_ids_array));
+		
 		// We loop through each of the categories
 		foreach( $term_ids_array as $term ) {
+			// Let's reset the $transition array on every term
+			$transition = '';
+			
 			// We set a query to get all posts belonging to the individual categories
 			$the_query = new WP_Query( array( 'cat' => $term->term_id ) );
 			
@@ -351,5 +354,7 @@ class Related_Posts_Plus_Admin {
 				}
 			}
 		}
+		
+		//die(var_dump($this->post_array));
 	}
 }

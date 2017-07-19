@@ -26,15 +26,4 @@
 		<?php endforeach; ?>
 		</ul>
 	</div>
-
-	<div class="related-posts-selected">
-		<ul id="selected-posts">
-			<?php foreach( $relations_array as $relation ): ?>
-			<li id="post-handler">
-				<a href="#" class="<?php echo array_keys($relations_array, $relation)[0]; ?>"><?php echo $relation; ?></a>
-				<input type="checkbox" value="<?php echo array_keys($relations, $relation)[0]; ?>" name="related_post[]" checked>
-			</li>			
-			<?php endforeach; ?>
-		</ul>
-	</div>
 </div>
