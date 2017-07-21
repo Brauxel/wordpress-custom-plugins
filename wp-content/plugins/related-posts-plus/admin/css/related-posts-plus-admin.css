@@ -21,3 +21,15 @@
 	cursor: default;
 	opacity: 0.5;
 }
+
+#selected-posts label {
+	color: #0073aa;
+	transition-duration: 0.05s;
+    transition-property: border, background, color;
+    transition-timing-function: ease-in-out;
+	text-decoration: underline;
+}
+
+#selected-posts input {
+	visibility: hidden;
+}

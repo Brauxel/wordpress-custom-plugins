@@ -69,7 +69,7 @@ class Related_Posts_Plus {
 	public function __construct() {
 
 		$this->plugin_name = 'related-posts-plus';
-		$this->version = '1.0.0';
+		$this->version = '1.0.18';
 
 		$this->load_dependencies();
 		$this->set_locale();

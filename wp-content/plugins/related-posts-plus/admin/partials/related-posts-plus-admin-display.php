@@ -18,12 +18,17 @@
 	<div class="related-posts-listed">
 		<ul id="listed-posts">
 		<?php 
-			foreach( $custom_posts as $custom_post ):
+			foreach( $custom_posts as $custom_postkey => $custom_post ):
 		?>
-			<li id="listed-obj">
-				<a href="#"><?php echo $custom_post; ?></a>				
+			<li id="<?php echo $custom_postkey; ?>">
+				<a href="#" class="post"><?php echo $custom_post; ?></a>				
 			</li>
 		<?php endforeach; ?>
 		</ul>
+	</div>
+	
+	<div class="related-posts-selected">
+		<div id="selected-posts">
+		</div>
 	</div>
 </div>

@@ -49,8 +49,6 @@ class Related_Posts_Plus_Admin {
 	 */
 	protected $post_array;
 	
-	public $test = 'in';
-
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -162,7 +160,7 @@ class Related_Posts_Plus_Admin {
 		  * @param4   string:$ver   $this->version   The current version of the plugin set in includes/class-related-posts-plus.php Related_Posts_Plus->version
 		  * @param5   bool:$in_footer  Loads JS in <footer>
 		 **/
-		wp_register_script( $this->plugin_name.'_core', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin.js', array( 'jquery' ), $this->version, false );
+		wp_register_script( $this->plugin_name.'_core', plugin_dir_url( __FILE__ ) . 'js/related-posts-plus-admin.js', array( 'jquery' ), $this->version, true );
 
 	}
 

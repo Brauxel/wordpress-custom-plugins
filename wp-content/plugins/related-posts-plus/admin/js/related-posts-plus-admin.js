@@ -28,43 +28,25 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
-	  
-	$( document ).ready( function() {
-		// Move to selected posts list on click and disable button
-		$('#listed-posts li').on('click', 'a', function() {
-			var moveContent = '<li id="post-handler">' + $(this).parent().html() + '</li>';
-			//alert(moveContent);
-			$('#selected-posts').append(moveContent);
-			$(this).parent().addClass('hide');
-			return false;
-		});
+	
+	$( document ).on('click', '#listed-posts .post', function() {
+		$(this).parent().addClass('hide');
+		var moveContent = '<div class="field-group"><input id="' + $(this).parent().attr('id') + '" type="checkbox" value="'+ $(this).parent().attr('id') +'" name="related_post[]" placeholder="' + $(this).html() + '" checked><label for="' + $(this).parent().attr('id') + '">' + $(this).html() + '</label></div>';		
 		
-		/*$('#selected-posts li').on('click', 'a', function() {
-			alert('in');
-			return false;
-		});*/
-	});
-	
-	$(document).on('click', '#listed-obj', function() {
-		if($( "#selected-posts li" ).length < 4) {
-			var moveContent = '<li id="post-handler">' + $(this).html() + '<input type="checkbox" value="'+ $(this).find('a').attr('class') +'" name="related_post[]" checked></li>';
-			$('#selected-posts').append(moveContent);
-			$(this).addClass('hide');
-		} else {
-			alert('only 4 please');
-		}
+		$('#selected-posts').append(moveContent);
+		
+		console.log(moveContent);
+		
 		return false;
 	});
 	
-	$(document).on('click', '#post-handler', function() {
-		//alert($(this).text());
-		var id = $(this).find('a').attr('class');
-		//alert(id);
-
-		$('#listed-posts li a.' + id).parent().removeClass('hide');
+	$( document ).on('click', '#selected-posts .field-group', function() {
+		var identifier = '#' + $(this).find('input').attr('id');
+		console.log(identifier);
+		
 		$(this).remove();
-
-		return false;
+		
+		$('#listed-posts').find(identifier).removeClass('hide');
 	});
 
-	})( jQuery );
+})( jQuery );
